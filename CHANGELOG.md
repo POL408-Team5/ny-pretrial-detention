@@ -18,6 +18,8 @@
 
 ## A 数据与特征（Yiling Long、Xinhui Zong）
 
+- 2026-11-07 · Xinhui Zong · Started A2-05 with training-only proxy-variable summaries and reviewed feature code · `notebooks/02_features.ipynb` · PR #—
+
 - 2026-11-07 · Yiling Long · [接口] 组内决定：性别移入审计变量（FAIRNESS_GROUPS），新增补充特征组 `CASE_PLUS_GENDER`；`check_leakage` 加 `allow` 参数；测试增至 13 个；待决事项 2–4 已定 · `src/config.py`、`src/features.py`、`tests/`、`notebooks/02_features.ipynb`、`docs/` · PR #—
 - 2026-11-07 · Yiling Long · 回应 Xinhui 审阅：测试年不再计算任何结果统计（diagnostics、notebook 01、Table 1）并在 data/README 记录；Table 1 加中位数、计数和小格抑制；notebook 01 改为读已生成文件；前科时点无法从官方文档确认，列为 D14 · `src/sample.py`、`notebooks/01–02`、`reports/table1.csv`、`data/README.md`、`docs/` · PR #—
 - 2026-11-07 · Yiling Long · [接口] 完成 A2-01 至 A2-04（代 Xinhui）：`src/features.py`（`get_X`、`check_leakage`、`NUMERIC`/`CATEGORICAL`）与测试；notebook 02（Table 1、缺失与异常、跨年一致性）；年龄 0 修正（新列 `age_fixed`） · `src/features.py`、`tests/`、`notebooks/02_features.ipynb`、`reports/table1.csv`、`src/sample.py` · PR #—
