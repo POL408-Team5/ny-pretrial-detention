@@ -1,0 +1,36 @@
+# --- Data ---
+# Raw data are public: commit the gzip files only (uncompressed CSVs exceed GitHub's 100 MB limit)
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/*.csv.gz
+data/processed/*
+!data/processed/.gitkeep
+data/external/*
+!data/external/.gitkeep
+models/*
+!models/.gitkeep
+*.parquet
+*.joblib
+*.pkl
+*.pickle
+*.feather
+# loose CSVs anywhere except aggregate tables in reports/
+*.csv
+!reports/*.csv
+!reports/**/*.csv
+
+# --- Local scratch / secrets ---
+scratch/
+.env
+.envrc
+*.key
+.DS_Store
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.vscode/
+.idea/
+.pytest_cache/

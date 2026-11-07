@@ -1,0 +1,20 @@
+# Python 3.11 recommended
+# Data handling
+pandas>=2.1
+numpy>=1.26
+pyarrow>=14.0
+openpyxl>=3.1      # read the UCS data dictionary (.xlsx)
+
+# Modeling
+scikit-learn>=1.4
+xgboost>=2.0
+statsmodels>=0.14
+shap>=0.44
+
+# Visualization
+matplotlib>=3.8
+seaborn>=0.13
+
+# Notebooks
+jupyterlab>=4.0
+ipykernel>=6.25
