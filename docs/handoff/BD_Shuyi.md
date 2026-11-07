@@ -53,10 +53,10 @@ def comparison_table(pred_df, split="valid") -> pd.DataFrame   # 行：model；�
 输出 `data/processed/predictions_baseline.parquet`；notebook 05 报告验证集结果。
 
 ### BD-06 比较与选模型（11/14）
-`notebooks/07_compare_test.ipynb`：合并 E 的预测，验证集比较表（五模型 + 规则 × 三组特征）；`CASE` → `CASE_COURT` → `CASE_COURT_JUDGE` 的 AUC 增量（配对 bootstrap 区间）；校准图。全组据此选最终模型。
+`notebooks/07_compare_test.ipynb`：合并 E 的预测，验证集比较表（五模型 + 规则 × 三组特征）；`CASE` → `CASE_COURT` → `CASE_COURT_JUDGE` 的 AUC 增量（配对 bootstrap 区间），**同时报告只含已编码法官（`judge_id` 以 J 开头）的案件**——2023 年约 30% 是 `unseen` 法官；校准图。全组据此选最终模型。
 
 ### BD-07 冻结后测试（11/15，只跑一次）
-`run_test=True` 跑选定模型 × 三组特征；测试集比较表、信息增益图（附区间）、校准图，存 `reports/`。跑完在群里通知，之后不再改模型。
+`run_test=True` 跑选定模型 × 三组特征（重新拟合用 2021–2023，`CASE_COURT_JUDGE` 组用 `config.JUDGE_COL_FINAL` 代替 `judge_id`）；测试集比较表、信息增益图（附区间）、校准图，存 `reports/`。跑完在群里通知，之后不再改模型。
 
 ### BD-08 Q3（11/23 之后，视进度）
 在 `released == 1` 的人中预测 `y_warrant`；注意观察窗口到处置为止长短不一、未结案件。开工前先和 Yiling 定样本。

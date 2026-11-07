@@ -17,16 +17,19 @@ Per the official documentation (`docs/Pretrial Release Data documentation- for w
 
 ## Files in `data/raw/`
 
-| File | Rows | Downloaded | sha256 of the uncompressed CSV (first 16) |
-|---|---:|---|---|
-| `NYS for Web 2021.csv.gz` | 246,202 | 2026-11-06 | `b676e4f9f4e30d62` |
-| `NYS for Web 2022.csv.gz` | 286,588 | 2026-11-06 | `b745ab9e902b687d` |
-| `NYS for Web 2023.csv.gz` | 324,619 | 2026-11-06 | `01dddf25180b9bad` |
-| `NYS for Web 2024.csv.gz` | — | **to download** | check columns against 2021–2023 |
+| File | Rows | Downloaded | sha256 of the uncompressed CSV (first 16) | Use |
+|---|---:|---|---|---|
+| `NYS for Web 2021.csv.gz` | 246,202 | 2026-11-06 | `b676e4f9f4e30d62` | train |
+| `NYS for Web 2022.csv.gz` | 286,588 | 2026-11-06 | `b745ab9e902b687d` | train |
+| `NYS for Web 2023.csv.gz` | 324,619 | 2026-11-06 | `01dddf25180b9bad` | validation |
+| `NYS for Web 2024.csv.gz` | 350,051 | 2026-11-07 | `8cc811152bf623da` | test (run once after the freeze) |
+| `NYS for Web 2025.csv.gz` | 353,403 | 2026-11-07 | `294616173357af08` | not in `config.YEARS`; possible extra out-of-time check only (13.5% of dockets still pending) |
 
-All 131 columns are identical across 2021–2023. Check a file: `gunzip -c "data/raw/NYS for Web 2021.csv.gz" | shasum -a 256`.
+2021–2025 share the same 131 columns and the same six release-decision categories. `NYS for Web 2020.csv` (130 columns, no `rearrest_180`; reform's first year and COVID) is kept locally only and not used.
 
-Documentation in `docs/`: `PretrialReleaseDataDictionaryWeb.xlsx` (downloaded 2026-11-06) and the documentation PDF. A newer dictionary appears to be online (it reportedly lists a "Nominal bail-set" category, a DCJS extract date and fields that apply only after 2024-11-19); download it as `docs/PretrialReleaseDataDictionaryWeb_<date>.xlsx` and compare.
+Check a file: `gunzip -c "data/raw/NYS for Web 2024.csv.gz" | shasum -a 256`.
+
+Documentation in `docs/`: `PretrialReleaseDataDictionaryWeb.xlsx` and the documentation PDF were downloaded again on 2026-11-07 and are **byte-identical** to the 2026-11-06 copies, so the current official dictionary has no separate "Nominal bail-set" category; nominal bail is identified from the bail amounts (D5). Also in `docs/`: `Disposition Hierarchy.pdf` and `Pretrial Release Data Dashboard Overview.pdf`.
 
 ## Build
 
@@ -47,8 +50,12 @@ Status: **proposed**, to be confirmed at the 2026-11-07 team meeting. Evidence: 
 | D3 | Keep `Docket` and `Felony Youth Complaint` case types | Other types are superior-court first securing orders with completeness caveats (~8% of NYC rows) |
 | D4 | `y_detain` = `Remanded` or `Bail-set`; 0 = `ROR` or `Nonmonetary release` | The decision itself; named "bail set or remanded", not "detained" |
 | D5 | Flag **nominal bail** (bail set and every first bail amount ≤ $1); exclude from the main sample, keep for sensitivity | The dictionary notes $1 bail is often set to credit time served when the person is remanded on another case; ~20% of NYC bail-set dockets in 2022 |
-| D6 | One docket per `arr_cycle_id` (most serious top charge); dockets without `arr_cycle_id` kept | 11% of rows are in multi-docket cycles; decisions differ within 13% of those cycles. Also check cycles that span years |
+| D6 | One docket per `arr_cycle_id`: earliest arraignment year, then most serious top charge; dockets without `arr_cycle_id` kept | Multi-docket cycles are almost all a local-court docket plus a superior-court case for the same arrest, which D3 already removes; D6 drops only 81 further rows (2021–2024). Keeping the earliest year means a later year never changes an earlier year's sample; afterwards no main-sample cycle spans two years |
 | D7 | `representation_type` excluded from features | Defined as the most recent attorney type, so it includes counsel retained after arraignment |
 | D8 | Prior-record fields: missing kept as a separate indicator (`dcjs_missing`), not set to 0 | Missing = no DCJS match |
 | D9 | Judge names replaced by `judge_id`; names never shown in outputs | Privacy and course plan |
 | D10 | Raw column names converted to snake_case on load | Consistent code across the team |
+| D11 | `case_id` = `internal_case_id`, kept as a string | It is a hexadecimal identifier (e.g. `0xF7…`), not a number |
+| D12 | `judge_id` coded on training-year (2021–22) main-sample caseloads (≥ 100 cases → `J001`…; fewer → `other`; not seen → `unseen`); `judge_id_final` coded the same way on 2021–2023 for the final refit | `unseen` share: 30.5% of 2023 and 52.9% of 2024 cases under `judge_id`; 28.2% of 2024 cases under `judge_id_final` |
+
+Sample flow (2021–2024): 1,207,460 raw rows → 647,564 NYC → 502,989 after dropping disposed/unknown (`analytic.parquet`) → 449,474 main sample (train 193,196; validation 120,457; test 135,821). See `reports/sample_flow.csv` and `notebooks/01_build_sample.ipynb`.

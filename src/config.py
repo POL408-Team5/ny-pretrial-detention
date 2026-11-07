@@ -77,7 +77,8 @@ FEATURES_CASE = [
     "gender",                      # [decide]
 ]
 FEATURES_COURT = ["county_name"]   # docket cases: one Criminal Court per county
-FEATURES_JUDGE = ["judge_id"]      # anonymised in src/sample.py
+FEATURES_JUDGE = ["judge_id"]      # anonymised in src/sample.py; coded on TRAIN_YEARS
+JUDGE_COL_FINAL = "judge_id_final"  # coded on TRAIN_YEARS + VALID_YEAR; use in place of judge_id for the final refit / 2024 test
 FEATURE_SETS = {
     "CASE": FEATURES_CASE,
     "CASE_COURT": FEATURES_CASE + FEATURES_COURT,
@@ -124,7 +125,7 @@ LEAKAGE_BLOCKLIST = [
     "race", "ethnicity", "age_group", "judge_name",
     # outcomes and sample flags
     "y_detain", "y_warrant", "y_rearrest", "released", "nominal_bail", "bail_posted_at_arraign",
-    "main_sample", "dup_cycle", "excl_case_type",
+    "main_sample", "dup_cycle", "excl_case_type", "judge_id_final",
 ]
 
 # ---- Modeling / evaluation ----

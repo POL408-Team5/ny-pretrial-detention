@@ -78,7 +78,7 @@
 
 | 列 | 类型 | 说明 |
 |---|---|---|
-| `case_id` | int | 主键，= `internal_case_id` |
+| `case_id` | str | 主键，= `internal_case_id`（十六进制字符串，如 `0xF7…`，不是数字） |
 | `arr_cycle_id` | float | 逮捕周期，可缺失 |
 | `arraign_year` | int | 提审年 |
 | `split` | str | `train` / `valid` / `test` |
@@ -89,7 +89,8 @@
 | `y_warrant`、`y_rearrest` | int 0/1 | Q3 用 |
 | `excl_case_type`、`dup_cycle` | int 0/1 | 样本筛选标记 |
 | `main_sample` | bool | 通过所有主样本规则 |
-| `judge_id` | str | 匿名法官编号（`J001` 起）；低频为 `other`，验证 / 测试年新出现为 `unseen` |
+| `judge_id` | str | 匿名法官编号（`J001` 起），按 2021–22 编码；低频为 `other`，之后新出现为 `unseen`。**选模型（2023 验证）用这一列** |
+| `judge_id_final` | str | 同上，但按 2021–2023 编码。**冻结后重新拟合、预测 2024 时用这一列代替 `judge_id`** |
 | `dcjs_missing` | int 0/1 | 前科字段缺失（没匹配到 DCJS，不等于无前科） |
 | `age_group` | str | 公平性分组 |
 | `race`、`ethnicity` | str | **只用于公平性分析** |
@@ -202,7 +203,8 @@ def shap_summary(feature_set, model_name, df) -> ...
 **2026-11-07**
 
 - 已完成：换题；方案 v2（`docs/项目方案_v2.md`）；`src/config.py` 按 v2 更新（snake_case 列名、三组特征、泄露黑名单、样本规则常量）；仓库建立。
-- 已下载并提交（gzip）：2021–2023 原始文件；字典、数据说明（2026-11-06）。**待下载**：2024 文件、最新版字典。
+- 已下载并提交（gzip）：2021–2025 原始文件；字典、数据说明、处置层级（11/7 重新下载的字典与 11/6 版完全相同）。
 - 每人的任务、规格、验收标准和状态：`docs/handoff/`。
-- 下一步：11/7 组会定方案第 11 节 → A 写 `sample.py`、`features.py`、`build_dataset.py`（11/8–9）→ 11/10 全组本地跑通。
+- **11/7 已完成 A1-01 至 A1-04**：2021–2025 原始数据已入库（2025 暂不使用）；`python -m src.build_dataset` 生成 `analytic.parquet`（502,989 行，主样本 449,474：训练 193,196 / 验证 120,457 / 测试 135,821）和 `reports/sample_flow.csv`。各人可以开始 EDA。
+- 下一步：A2 写 `features.py`；11/10 全组本地跑通。
 - 其他角色现在可以做：用假数据先写好自己的函数（接口见 3.3、3.5）。

@@ -54,10 +54,10 @@ def build_sample(raw) -> tuple[pd.DataFrame, pd.DataFrame]   # (analytic 行, sa
 
 | 任务 | 截止 | 状态 | 日期 | PR |
 |---|---|---|---|---|
-| A1-01 sample.py | 11/7 | todo | | |
-| A1-02 build_dataset.py | 11/7 | todo | | |
-| A1-03 notebook 01 | 11/8 | todo | | |
-| A1-04 2024 数据与新字典 | 11/8 | todo | | |
+| A1-01 sample.py | 11/7 | done | 11/7 | |
+| A1-02 build_dataset.py | 11/7 | done | 11/7 | |
+| A1-03 notebook 01 | 11/8 | done | 11/7 | |
+| A1-04 2024 数据与新字典 | 11/8 | done | 11/7 | |
 | A1-05 给老师的邮件 | 11/9 | todo | | |
 | A1-06 敏感性数据 | 11/14 | todo | | |
 | A1-07 deck 页 | 11/19 | todo | | |
