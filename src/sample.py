@@ -284,8 +284,11 @@ def diagnostics(df: pd.DataFrame) -> dict:
     return {
         "rows_analytic": len(df),
         "rows_main": len(main),
-        "y_detain_rate_main_by_year": main.groupby(config.YEAR_COL)[config.TARGET_Q1].mean().round(4).to_dict(),
-        "nominal_bail_share_of_bail_set": round(df.loc[bail_set, "nominal_bail"].mean(), 4),
+        # outcome rates only for training / validation years: the test year stays unseen until the freeze
+        "y_detain_rate_main_by_year (train/valid only)": main[main[config.YEAR_COL] != config.TEST_YEAR]
+        .groupby(config.YEAR_COL)[config.TARGET_Q1].mean().round(4).to_dict(),
+        "nominal_bail_share_of_bail_set (train/valid only)": round(
+            df.loc[bail_set & (df[config.YEAR_COL] != config.TEST_YEAR), "nominal_bail"].mean(), 4),
         "bail_set_without_amount": int((bail_set & df[config.BAIL_AMOUNT_COLS].isna().all(axis=1)).sum()),
         "cycles_spanning_years": int((span > 1).sum()),
         "rows_in_cycles_spanning_years": int(cyc[config.CYCLE_COL].isin(span[span > 1].index).sum()),

@@ -18,6 +18,8 @@
 
 ## A 数据与特征（Yiling Long、Xinhui Zong）
 
+- 2026-11-07 · Yiling Long · [接口] 组内决定：性别移入审计变量（FAIRNESS_GROUPS），新增补充特征组 `CASE_PLUS_GENDER`；`check_leakage` 加 `allow` 参数；测试增至 13 个；待决事项 2–4 已定 · `src/config.py`、`src/features.py`、`tests/`、`notebooks/02_features.ipynb`、`docs/` · PR #—
+- 2026-11-07 · Yiling Long · 回应 Xinhui 审阅：测试年不再计算任何结果统计（diagnostics、notebook 01、Table 1）并在 data/README 记录；Table 1 加中位数、计数和小格抑制；notebook 01 改为读已生成文件；前科时点无法从官方文档确认，列为 D14 · `src/sample.py`、`notebooks/01–02`、`reports/table1.csv`、`data/README.md`、`docs/` · PR #—
 - 2026-11-07 · Yiling Long · [接口] 完成 A2-01 至 A2-04（代 Xinhui）：`src/features.py`（`get_X`、`check_leakage`、`NUMERIC`/`CATEGORICAL`）与测试；notebook 02（Table 1、缺失与异常、跨年一致性）；年龄 0 修正（新列 `age_fixed`） · `src/features.py`、`tests/`、`notebooks/02_features.ipynb`、`reports/table1.csv`、`src/sample.py` · PR #—
 - 2026-11-07 · Yiling Long · [接口] 加入 2024（测试）和 2025（暂不用）原始数据；新增 `judge_id_final`（按 2021–23 编码，用于最终测试）；逮捕周期去重改为先保留较早年份；读入时先筛纽约市以降低内存；核实官方字典无更新 · `src/sample.py`、`src/config.py`、`notebooks/01_build_sample.ipynb`、`data/`、`docs/` · PR #—
 - 2026-11-07 · Yiling Long · 完成样本与数据构建：`python -m src.build_dataset` 生成 analytic.parquet（351,996 行，主样本 313,653）和样本流程表；notebook 01 记录名义保释、逮捕周期、法官编码（2023 年 30% 为新法官）与缺失检查 · `src/sample.py`、`src/build_dataset.py`、`notebooks/01_build_sample.ipynb`、`reports/sample_flow.csv`、`data/README.md`、`docs/handoff/` · PR #—

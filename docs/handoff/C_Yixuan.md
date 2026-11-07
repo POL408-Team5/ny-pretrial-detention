@@ -32,7 +32,7 @@ def residuals(pred_df, df, by: str) -> pd.DataFrame
 指标函数调用 Shuyi 的 `src/evaluate.py`，不重写。写 `tests/test_fairness.py`（小样本手算核对 FPR / FNR）。
 
 ### C-03 公平性分析（验证集 11/14；测试集 11/16–18）
-`notebooks/08_fairness.ipynb`：按 `race`、`ethnicity`、`age_group` 的 `group_metrics`；分组校准图；`CASE` 与 `CASE_COURT_JUDGE` 两个模型都做，看加入法官后组间差距是否变化。测试集结果要等 Shuyi 11/15 跑完。
+`notebooks/08_fairness.ipynb`：按 `race`、`ethnicity`、`gender`、`age_group` 的 `group_metrics`；分组校准图；`CASE` 与 `CASE_COURT_JUDGE` 两个模型都做，看加入法官后组间差距是否变化。测试集结果要等 Shuyi 11/15 跑完。
 
 ### C-04 残差（11/16–18）
 县和法官的残差图（`CASE` 组最终模型）：哪些法官比“同样案件的平均预测”系统性偏高或偏低，附区间；只显示 `judge_id`。

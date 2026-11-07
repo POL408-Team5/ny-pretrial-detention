@@ -21,7 +21,7 @@
 - **决策者与时点**：提审法官，被捕后约 24 小时内的提审。**特征只能用提审当下已有的信息。**
 - **数据**：NY UCS Pretrial Release Data，一行一个匿名“被告—案卷”，纽约市五县，2021–2024 提审年。
 - **任务**：二分类，`y_detain` = 设保释或收押（1）vs 无条件释放 / 非金钱条件释放（0）。**它不是“实际被羁押”。**
-- **三组特征**：`CASE` ⊂ `CASE_COURT` ⊂ `CASE_COURT_JUDGE`（见 `src/config.py`）。
+- **三组特征**：`CASE` ⊂ `CASE_COURT` ⊂ `CASE_COURT_JUDGE`（见 `src/config.py`）。性别和种族一样只用于审计；补充特征组 `CASE_PLUS_GENDER`（CASE + 性别）只用来看性别能多解释多少，不参加嵌套比较。
 - **模型**：Logistic、LASSO Logistic、决策树、随机森林、XGBoost；规则基准。
 - **划分**：2021–2022 训练（交叉验证调参）；2023 验证（选模型、定阈值）；2024 测试（11/15 冻结后只跑一次）。
 - **解释与公平性**：SHAP；按种族的校准、FPR / FNR；法院 / 法官残差（匿名）。
@@ -94,7 +94,7 @@
 | `dcjs_missing` | int 0/1 | 前科字段缺失（没匹配到 DCJS，不等于无前科） |
 | `age_fixed` | int 0/1 | 原始 `age_at_arrest` = 0（占位值），已用 `age_at_crime` 替换（或设为缺失） |
 | `age_group` | str | 公平性分组 |
-| `race`、`ethnicity` | str | **只用于公平性分析** |
+| `race`、`ethnicity`、`gender` | str | **只用于公平性分析**（`gender` 另外只允许出现在补充特征组 `CASE_PLUS_GENDER`） |
 | 其余原始列 | — | snake_case 原名；`judge_name` 已删除 |
 
 另输出 `reports/sample_flow.csv`（只含计数，可上传）：每一步筛选后的行数，按年份分列。
@@ -114,7 +114,7 @@
 
 ### 3.4 防泄露规则
 
-`config.LEAKAGE_BLOCKLIST` 中的列**不得**进入任何特征集：释放决定及其组成部分、保释金额、交保信息、检方请求、辩护人类型（记录的是最近一次律师，含提审后信息）、出庭次数、逮捕令、处置、判决、羁押天数、再逮捕、种族、族裔、法官姓名、所有标签和样本标记。`features.check_leakage()` 由 B 在训练前调用。**AUC 异常高（> 0.95）先怀疑泄露。**
+`config.LEAKAGE_BLOCKLIST` 和 `config.FAIRNESS_GROUPS` 中的列**不得**进入主特征集（`gender` 例外地只能出现在 `CASE_PLUS_GENDER`）：释放决定及其组成部分、保释金额、交保信息、检方请求、辩护人类型（记录的是最近一次律师，含提审后信息）、出庭次数、逮捕令、处置、判决、羁押天数、再逮捕、种族、族裔、法官姓名、所有标签和样本标记。`features.check_leakage()` 由 B 在训练前调用。**AUC 异常高（> 0.95）先怀疑泄露。**
 
 ### 3.5 函数接口
 

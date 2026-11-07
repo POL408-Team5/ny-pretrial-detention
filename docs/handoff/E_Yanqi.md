@@ -38,7 +38,7 @@ def shap_summary(feature_set, model_name, df, n_sample=5000) -> pd.DataFrame
 def permutation_importance_table(feature_set, model_name, df) -> pd.DataFrame
     # sklearn.inspection.permutation_importance，验证集，scoring="roc_auc"，按原始特征置换
 ```
-`notebooks/09_shap.ipynb`：最终模型的 SHAP 汇总图、前三个特征的依赖图、permutation importance 对比 impurity importance（为老师的问题准备）。准备回答“模型最依赖的三个输入”。
+`notebooks/09_shap.ipynb`：最终模型的 SHAP 汇总图、前三个特征的依赖图、permutation importance 对比 impurity importance（为老师的问题准备）。准备回答“模型最依赖的三个输入”。另外对 `CASE_PLUS_GENDER` 的 XGBoost 做一次 SHAP，报告性别在 SHAP 里的排名（全组据此决定性别最终是否进模型）。
 
 ### E-04 deck 整合（11/19–21）
 收各人页面（11/19），统一风格，按 `docs/项目方案_v2.md` 第 7 节结构排；11/20–21 全组过一遍。**11/22 提交。**

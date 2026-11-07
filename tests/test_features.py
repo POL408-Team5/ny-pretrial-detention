@@ -4,7 +4,7 @@ import pandas as pd
 import pytest
 
 from src import config
-from src.features import CATEGORICAL, FEATURE_SETS, NUMERIC, check_leakage, get_X
+from src.features import ALL_SETS, CATEGORICAL, FEATURE_SETS, NUMERIC, check_leakage, get_X
 
 
 def _toy(n: int = 6) -> pd.DataFrame:
@@ -28,7 +28,15 @@ def test_feature_sets_are_nested_and_clean():
     check_leakage(FEATURE_SETS["CASE_COURT_JUDGE"])  # must not raise
 
 
-@pytest.mark.parametrize("col", ["race", "ethnicity", "representation_type", "y_detain",
+def test_gender_only_in_supplementary_set():
+    assert all("gender" not in cols for cols in FEATURE_SETS.values())
+    assert "gender" in ALL_SETS["CASE_PLUS_GENDER"]
+    X = get_X(_toy(), "CASE_PLUS_GENDER")
+    assert "gender" in X.columns and X.loc[0, "gender"] == "Missing"
+    assert "gender" not in get_X(_toy(), "CASE").columns
+
+
+@pytest.mark.parametrize("col", ["race", "ethnicity", "gender", "representation_type", "y_detain",
                                  "release_decision_at_arraign", "judge_name", "y_anything"])
 def test_check_leakage_rejects(col):
     with pytest.raises(ValueError):
@@ -43,7 +51,6 @@ def test_get_X_columns_and_types():
         assert X[c].dtype == "float64"
     for c in [c for c in X.columns if c not in NUMERIC]:
         assert X[c].map(type).eq(str).all()          # no NaN in categorical columns
-    assert X.loc[0, "gender"] == "Missing"
     assert X.loc[1, "top_arraign_attempt_indicator"] == "Not attempt"
     assert np.isnan(X.loc[2, "prior_vfo_cnt"])        # numeric NaN kept for the pipeline
 

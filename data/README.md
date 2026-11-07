@@ -39,6 +39,10 @@ python -m src.build_dataset
 
 Outputs `data/processed/analytic.parquet` (one row per docket after the NYC / decision filters, with sample flags) and `reports/sample_flow.csv` (counts only).
 
+## Test-year protocol
+
+2024 is the test year. Before the 11/15 freeze, no outcome statistic (`y_detain`, release decisions, nominal-bail share) is computed for 2024: `src/sample.diagnostics()`, notebook 01 and Table 1 exclude it. Sample counts, feature distributions and judge-coding shares for 2024 are shown because they do not involve the outcome. Disclosure: on 2026-11-07, before this rule was added, the build printed the 2024 main-sample `y_detain` rate once (about 12%); no model was fit or evaluated on 2024.
+
 ## Processing decisions
 
 Status: **proposed**, to be confirmed at the 2026-11-07 team meeting. Evidence: quick checks on the 2022 NYC file (117,294 dockets after dropping cases disposed at arraignment and unknown decisions).
@@ -58,5 +62,6 @@ Status: **proposed**, to be confirmed at the 2026-11-07 team meeting. Evidence: 
 | D11 | `case_id` = `internal_case_id`, kept as a string | It is a hexadecimal identifier (e.g. `0xF7…`), not a number |
 | D12 | `judge_id` coded on training-year (2021–22) main-sample caseloads (≥ 100 cases → `J001`…; fewer → `other`; not seen → `unseen`); `judge_id_final` coded the same way on 2021–2023 for the final refit | `unseen` share: 30.5% of 2023 and 52.9% of 2024 cases under `judge_id`; 28.2% of 2024 cases under `judge_id_final` |
 | D13 | `age_at_arrest` = 0 replaced by `age_at_crime` when positive, else missing; flagged `age_fixed` | 0 is a placeholder (1,898 main-sample dockets, ~0.4%); 56 remain missing |
+| D14 | Prior-record and pending-case fields used as provided; the reference date is **not documented** | The UCS dictionary and the DCJS supplemental source notes do not state whether `prior_*` and `pend_*` are computed as of arrest/arraignment or as of the extract date (only `supervision` says "at the time of arraignment"). Listed as a limitation; question sent to UCS/DCJS if possible |
 
 Sample flow (2021–2024): 1,207,460 raw rows → 647,564 NYC → 502,989 after dropping disposed/unknown (`analytic.parquet`) → 449,474 main sample (train 193,196; validation 120,457; test 135,821). See `reports/sample_flow.csv` and `notebooks/01_build_sample.ipynb`.

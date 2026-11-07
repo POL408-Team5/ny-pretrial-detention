@@ -47,10 +47,10 @@ def comparison_table(pred_df, split="valid") -> pd.DataFrame   # 行：model；�
 写 `tests/test_evaluate.py`：完美预测 AUC = 1；随机预测 AUC ≈ 0.5；Brier 与 sklearn 一致。
 
 ### BD-04 冒烟测试（11/8 晚）
-`notebooks/05_models_baseline.ipynb`：规则基准 + `logit` × `CASE`，报告 `train_oof` 和 `valid` 的 AUC、AP、Brier。预期 AUC 约 0.8；**> 0.95 先怀疑泄露**，查 `features.check_leakage`。把结果数字发群里，周一邮件会用。
+`notebooks/05_models_baseline.ipynb`：规则基准 + `logit` × `CASE`，再加 `logit` × `CASE_PLUS_GENDER`（补充特征组），报告 `train_oof` 和 `valid` 的 AUC、AP、Brier，以及加入性别后的 AUC 变化。预期 AUC 约 0.8；**> 0.95 先怀疑泄露**，查 `features.check_leakage`。把结果数字发群里，周一邮件会用。
 
 ### BD-05 三个简单模型 × 三组特征（11/10–13）
-输出 `data/processed/predictions_baseline.parquet`；notebook 05 报告验证集结果。
+输出 `data/processed/predictions_baseline.parquet`（另加 `CASE_PLUS_GENDER` 作为补充组）；notebook 05 报告验证集结果。
 
 ### BD-06 比较与选模型（11/14）
 `notebooks/07_compare_test.ipynb`：合并 E 的预测，验证集比较表（五模型 + 规则 × 三组特征）；`CASE` → `CASE_COURT` → `CASE_COURT_JUDGE` 的 AUC 增量（配对 bootstrap 区间），**同时报告只含已编码法官（`judge_id` 以 J 开头）的案件**——2023 年约 30% 是 `unseen` 法官；校准图。全组据此选最终模型。

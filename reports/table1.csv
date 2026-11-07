@@ -1,75 +1,84 @@
-feature,level,train,valid,test
-top_severity_at_arraign,Felony,0.3055,0.3187,0.3113
-top_severity_at_arraign,Misdemeanor,0.6945,0.6813,0.6887
-top_charge_weight_at_arraign,AF,0.0077,0.0061,0.0056
-top_charge_weight_at_arraign,AM,0.6197,0.5951,0.602
-top_charge_weight_at_arraign,BF,0.0624,0.0645,0.0645
-top_charge_weight_at_arraign,BM,0.0166,0.0178,0.0187
-top_charge_weight_at_arraign,CF,0.0753,0.0699,0.0661
-top_charge_weight_at_arraign,DF,0.1058,0.1157,0.1159
-top_charge_weight_at_arraign,EF,0.0543,0.0625,0.0593
-top_charge_weight_at_arraign,UM,0.0582,0.0685,0.068
-top_charge_at_arraign_violent_felony_ind,N,0.8265,0.8295,0.8378
-top_charge_at_arraign_violent_felony_ind,Y,0.1735,0.1705,0.1622
-top_arraign_attempt_indicator,Attempt,0.0252,0.0258,0.0263
-top_arraign_attempt_indicator,Not attempt,0.9748,0.9742,0.9737
-arraign_charge_category,Aggravated Harassment,0.0256,0.0221,0.0205
-arraign_charge_category,Assault,0.3846,0.3765,0.371
-arraign_charge_category,Burglary,0.0356,0.037,0.0369
-arraign_charge_category,Conspiracy,0.0,0.0,0.0
-arraign_charge_category,Criminal Contempt,0.0563,0.0539,0.0517
-arraign_charge_category,Criminal Possession of a Weapon,0.0507,0.0466,0.0427
-arraign_charge_category,Criminal Trespass,0.0055,0.005,0.0048
-arraign_charge_category,DWI,0.0278,0.0248,0.0206
-arraign_charge_category,Drug,0.0668,0.0692,0.0808
-arraign_charge_category,Endangering Welfare,0.0091,0.0089,0.0086
-arraign_charge_category,Homicide Related,0.0078,0.0066,0.0052
-arraign_charge_category,Larceny,0.0868,0.0966,0.0988
-arraign_charge_category,Obstruction,0.0078,0.009,0.0099
-arraign_charge_category,Other,0.0414,0.0341,0.0341
-arraign_charge_category,Other Sex Offense,0.0137,0.0118,0.0109
-arraign_charge_category,Other VTL,0.0037,0.0034,0.003
-arraign_charge_category,Property,0.0762,0.082,0.0863
-arraign_charge_category,Rape,0.0042,0.0035,0.0035
-arraign_charge_category,Robbery,0.044,0.0461,0.0453
-arraign_charge_category,Strangulation,0.0198,0.0182,0.0171
-arraign_charge_category,Unlicensed Operation,0.0324,0.0447,0.0482
-hate_crime_ind,N,0.9984,0.9981,0.9986
-hate_crime_ind,Y,0.0016,0.0019,0.0014
-arrest_type,Custody,0.8522,0.884,0.8724
-arrest_type,DAT,0.1478,0.116,0.1276
-case_type,Docket,0.9899,0.9873,0.9866
-case_type,Felony Youth Complaint,0.0101,0.0127,0.0134
-dat_wo_ws_prior_to_arraign,N,0.9612,0.9779,0.9742
-dat_wo_ws_prior_to_arraign,Y,0.0388,0.0221,0.0258
-gender,Female,0.1828,0.1821,0.1904
-gender,Male,0.8172,0.8028,0.8095
-gender,Unknown,0.0001,0.0151,0.0001
-county_name,Bronx,0.1716,0.1738,0.1745
-county_name,Kings,0.3066,0.321,0.3305
-county_name,New York,0.2334,0.2131,0.2099
-county_name,Queens,0.2359,0.24,0.2342
-county_name,Richmond,0.0524,0.0521,0.0509
-prior_vfo_cnt,mean,0.217,0.21,0.203
-prior_vfo_cnt,share missing,0.0089,0.0124,0.0164
-prior_nonvfo_cnt,mean,0.445,0.41,0.395
-prior_nonvfo_cnt,share missing,0.0089,0.0124,0.0164
-prior_misd_cnt,mean,1.657,1.501,1.457
-prior_misd_cnt,share missing,0.0089,0.0124,0.0164
-pend_vfo,mean,0.097,0.088,0.087
-pend_vfo,share missing,0.0089,0.0124,0.0164
-pend_nonvfo,mean,0.162,0.158,0.159
-pend_nonvfo,share missing,0.0089,0.0124,0.0164
-pend_misd,mean,0.203,0.19,0.193
-pend_misd,share missing,0.0089,0.0124,0.0164
-supervision,mean,0.057,0.048,0.043
-supervision,share missing,0.0089,0.0123,0.0164
-dcjs_missing,mean,0.009,0.012,0.016
-dcjs_missing,share missing,0.0,0.0,0.0
-age_at_arrest,mean,35.372,35.559,35.858
-age_at_arrest,share missing,0.0001,0.0002,0.0001
-judge_id,coded,0.9932,0.6366,0.4295
-judge_id,other,0.0068,0.0582,0.0415
-judge_id,unseen,0.0,0.3052,0.529
-y_detain,share = 1,0.1293,0.1282,
-N,rows,193196.0,120457.0,135821.0
+feature,level,stat,train,valid,test,n_train,n_valid,n_test
+top_severity_at_arraign,Felony,share,0.3055,0.3187,0.3113,59016.0,38385.0,42283.0
+top_severity_at_arraign,Misdemeanor,share,0.6945,0.6813,0.6887,134180.0,82072.0,93538.0
+top_charge_weight_at_arraign,AF,share,0.0077,0.0061,0.0056,1483.0,734.0,757.0
+top_charge_weight_at_arraign,AM,share,0.6197,0.5951,0.602,119732.0,71685.0,81761.0
+top_charge_weight_at_arraign,BF,share,0.0624,0.0645,0.0645,12063.0,7765.0,8756.0
+top_charge_weight_at_arraign,BM,share,0.0166,0.0178,0.0187,3211.0,2141.0,2539.0
+top_charge_weight_at_arraign,CF,share,0.0753,0.0699,0.0661,14555.0,8419.0,8978.0
+top_charge_weight_at_arraign,DF,share,0.1058,0.1157,0.1159,20432.0,13935.0,15740.0
+top_charge_weight_at_arraign,EF,share,0.0543,0.0625,0.0593,10483.0,7532.0,8052.0
+top_charge_weight_at_arraign,UM,share,0.0582,0.0685,0.068,11237.0,8246.0,9238.0
+top_charge_at_arraign_violent_felony_ind,N,share,0.8265,0.8295,0.8378,159680.0,99916.0,113790.0
+top_charge_at_arraign_violent_felony_ind,Y,share,0.1735,0.1705,0.1622,33516.0,20541.0,22031.0
+top_arraign_attempt_indicator,Attempt,share,0.0252,0.0258,0.0263,4869.0,3112.0,3573.0
+top_arraign_attempt_indicator,Not attempt,share,0.9748,0.9742,0.9737,188327.0,117345.0,132248.0
+arraign_charge_category,Aggravated Harassment,share,0.0256,0.0221,0.0205,4946.0,2661.0,2779.0
+arraign_charge_category,Assault,share,0.3846,0.3765,0.371,74311.0,45352.0,50385.0
+arraign_charge_category,Burglary,share,0.0356,0.037,0.0369,6872.0,4458.0,5007.0
+arraign_charge_category,Conspiracy,share,,,,,,
+arraign_charge_category,Criminal Contempt,share,0.0563,0.0539,0.0517,10883.0,6497.0,7026.0
+arraign_charge_category,Criminal Possession of a Weapon,share,0.0507,0.0466,0.0427,9801.0,5610.0,5797.0
+arraign_charge_category,Criminal Trespass,share,0.0055,0.005,0.0048,1053.0,606.0,651.0
+arraign_charge_category,DWI,share,0.0278,0.0248,0.0206,5367.0,2985.0,2800.0
+arraign_charge_category,Drug,share,0.0668,0.0692,0.0808,12912.0,8333.0,10976.0
+arraign_charge_category,Endangering Welfare,share,0.0091,0.0089,0.0086,1764.0,1078.0,1167.0
+arraign_charge_category,Homicide Related,share,0.0078,0.0066,0.0052,1514.0,789.0,703.0
+arraign_charge_category,Larceny,share,0.0868,0.0966,0.0988,16774.0,11632.0,13422.0
+arraign_charge_category,Obstruction,share,0.0078,0.009,0.0099,1514.0,1080.0,1351.0
+arraign_charge_category,Other,share,0.0414,0.0341,0.0341,7995.0,4107.0,4638.0
+arraign_charge_category,Other Sex Offense,share,0.0137,0.0118,0.0109,2646.0,1422.0,1480.0
+arraign_charge_category,Other VTL,share,0.0037,0.0034,0.003,717.0,414.0,410.0
+arraign_charge_category,Property,share,0.0762,0.082,0.0863,14715.0,9872.0,11728.0
+arraign_charge_category,Rape,share,0.0042,0.0035,0.0035,807.0,424.0,473.0
+arraign_charge_category,Robbery,share,0.044,0.0461,0.0453,8510.0,5556.0,6151.0
+arraign_charge_category,Strangulation,share,0.0198,0.0182,0.0171,3818.0,2196.0,2322.0
+arraign_charge_category,Unlicensed Operation,share,0.0324,0.0447,0.0482,6268.0,5382.0,6549.0
+hate_crime_ind,N,share,0.9984,0.9981,0.9986,192883.0,120227.0,135626.0
+hate_crime_ind,Y,share,0.0016,0.0019,0.0014,313.0,230.0,195.0
+arrest_type,Custody,share,0.8522,0.884,0.8724,164648.0,106481.0,118487.0
+arrest_type,DAT,share,0.1478,0.116,0.1276,28548.0,13976.0,17334.0
+case_type,Docket,share,0.9899,0.9873,0.9866,191247.0,118930.0,134007.0
+case_type,Felony Youth Complaint,share,0.0101,0.0127,0.0134,1949.0,1527.0,1814.0
+dat_wo_ws_prior_to_arraign,N,share,0.9612,0.9779,0.9742,185706.0,117798.0,132323.0
+dat_wo_ws_prior_to_arraign,Y,share,0.0388,0.0221,0.0258,7490.0,2659.0,3498.0
+county_name,Bronx,share,0.1716,0.1738,0.1745,33160.0,20938.0,23696.0
+county_name,Kings,share,0.3066,0.321,0.3305,59241.0,38662.0,44888.0
+county_name,New York,share,0.2334,0.2131,0.2099,45088.0,25673.0,28506.0
+county_name,Queens,share,0.2359,0.24,0.2342,45578.0,28908.0,31815.0
+county_name,Richmond,share,0.0524,0.0521,0.0509,10129.0,6276.0,6916.0
+gender,Female,share,0.1828,0.1821,0.1904,35309.0,21936.0,25864.0
+gender,Male,share,0.8172,0.8028,0.8095,157873.0,96705.0,109944.0
+gender,Unknown,share,,,,,,
+prior_vfo_cnt,,mean,0.2173,0.2099,0.2028,,,
+prior_vfo_cnt,,median,0.0,0.0,0.0,,,
+prior_vfo_cnt,,share missing,0.0089,0.0124,0.0164,,,
+prior_nonvfo_cnt,,mean,0.4453,0.4097,0.395,,,
+prior_nonvfo_cnt,,median,0.0,0.0,0.0,,,
+prior_nonvfo_cnt,,share missing,0.0089,0.0124,0.0164,,,
+prior_misd_cnt,,mean,1.6572,1.5011,1.4567,,,
+prior_misd_cnt,,median,0.0,0.0,0.0,,,
+prior_misd_cnt,,share missing,0.0089,0.0124,0.0164,,,
+pend_vfo,,mean,0.097,0.0883,0.087,,,
+pend_vfo,,median,0.0,0.0,0.0,,,
+pend_vfo,,share missing,0.0089,0.0124,0.0164,,,
+pend_nonvfo,,mean,0.1617,0.1577,0.1585,,,
+pend_nonvfo,,median,0.0,0.0,0.0,,,
+pend_nonvfo,,share missing,0.0089,0.0124,0.0164,,,
+pend_misd,,mean,0.2026,0.1898,0.1925,,,
+pend_misd,,median,0.0,0.0,0.0,,,
+pend_misd,,share missing,0.0089,0.0124,0.0164,,,
+supervision,,mean,0.0568,0.0481,0.0435,,,
+supervision,,median,0.0,0.0,0.0,,,
+supervision,,share missing,0.0089,0.0123,0.0164,,,
+dcjs_missing,,mean,0.0089,0.0124,0.0164,,,
+dcjs_missing,,median,0.0,0.0,0.0,,,
+dcjs_missing,,share missing,0.0,0.0,0.0,,,
+age_at_arrest,,mean,35.3717,35.5592,35.8582,,,
+age_at_arrest,,median,33.0,33.0,34.0,,,
+age_at_arrest,,share missing,0.0001,0.0002,0.0001,,,
+judge_id,coded,share,0.9932,0.6366,0.4295,,,
+judge_id,other,share,0.0068,0.0582,0.0415,,,
+judge_id,unseen,share,0.0,0.3052,0.529,,,
+y_detain,1,share,0.1293,0.1282,,,,
+N,,rows,193196.0,120457.0,135821.0,,,

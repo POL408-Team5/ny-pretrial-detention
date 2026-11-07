@@ -74,17 +74,22 @@ FEATURES_CASE = [
     "pend_vfo", "pend_nonvfo", "pend_misd", "supervision", "dcjs_missing",
     "dat_wo_ws_prior_to_arraign",  # [decide] failed to appear for a DAT before arraignment
     "age_at_arrest",
-    "gender",                      # [decide]
 ]
 FEATURES_COURT = ["county_name"]   # docket cases: one Criminal Court per county
 FEATURES_JUDGE = ["judge_id"]      # anonymised in src/sample.py; coded on TRAIN_YEARS
 JUDGE_COL_FINAL = "judge_id_final"  # coded on TRAIN_YEARS + VALID_YEAR; use in place of judge_id for the final refit / 2024 test
-FEATURE_SETS = {
+FEATURE_SETS = {                    # main analysis: nested sets
     "CASE": FEATURES_CASE,
     "CASE_COURT": FEATURES_CASE + FEATURES_COURT,
     "CASE_COURT_JUDGE": FEATURES_CASE + FEATURES_COURT + FEATURES_JUDGE,
 }
-FAIRNESS_GROUPS = ["race", "ethnicity", "age_group"]   # never features
+# Supplementary set (team decision 2026-11-07): gender is an audit variable like race, but we also
+# report how much it adds beyond case and record. Not part of the nested comparison.
+SUPPLEMENTARY_SETS = {
+    "CASE_PLUS_GENDER": FEATURES_CASE + ["gender"],
+}
+SUPPLEMENTARY_ALLOWED = {"CASE_PLUS_GENDER": ["gender"]}   # audit variables allowed in that set only
+FAIRNESS_GROUPS = ["race", "ethnicity", "gender", "age_group"]   # not features in the main sets
 AGE_BINS = [0, 18, 25, 35, 45, 55, 200]
 AGE_LABELS = ["<18", "18-24", "25-34", "35-44", "45-54", "55+"]
 
