@@ -224,6 +224,11 @@ def build_sample(raw: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
         .mask(rearrest.isna())
     )
     df["dcjs_missing"] = df["prior_vfo_cnt"].isna().astype(int)
+    # age_at_arrest == 0 is a placeholder (~0.4% of rows): use age_at_crime when it is positive, else missing.
+    age = pd.to_numeric(df["age_at_arrest"], errors="coerce")
+    crime_age = pd.to_numeric(df["age_at_crime"], errors="coerce")
+    df["age_fixed"] = age.eq(0).astype(int)
+    df["age_at_arrest"] = age.mask(age.eq(0), crime_age.where(crime_age > 0))
 
     # --- S4-S6 ---
     df["excl_case_type"] = (~df["case_type"].isin(config.CASE_TYPES_MAIN)).astype(int)
@@ -261,7 +266,7 @@ def build_sample(raw: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     front = [config.ID_COL, config.CYCLE_COL, config.YEAR_COL, "arraign_month", config.SPLIT_COL,
              config.MAIN_SAMPLE_COL, config.TARGET_Q1, "nominal_bail", "bail_posted_at_arraign",
              config.RELEASED_COL, config.TARGET_Q3, config.TARGET_Q3_ALT,
-             "excl_case_type", "dup_cycle", "dcjs_missing", "judge_id", config.JUDGE_COL_FINAL, "age_group"]
+             "excl_case_type", "dup_cycle", "dcjs_missing", "age_fixed", "judge_id", config.JUDGE_COL_FINAL, "age_group"]
     df = df[front + [c for c in df.columns if c not in front]].reset_index(drop=True)
     return df, pd.DataFrame(flow)
 

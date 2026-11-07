@@ -57,5 +57,6 @@ Status: **proposed**, to be confirmed at the 2026-11-07 team meeting. Evidence: 
 | D10 | Raw column names converted to snake_case on load | Consistent code across the team |
 | D11 | `case_id` = `internal_case_id`, kept as a string | It is a hexadecimal identifier (e.g. `0xF7…`), not a number |
 | D12 | `judge_id` coded on training-year (2021–22) main-sample caseloads (≥ 100 cases → `J001`…; fewer → `other`; not seen → `unseen`); `judge_id_final` coded the same way on 2021–2023 for the final refit | `unseen` share: 30.5% of 2023 and 52.9% of 2024 cases under `judge_id`; 28.2% of 2024 cases under `judge_id_final` |
+| D13 | `age_at_arrest` = 0 replaced by `age_at_crime` when positive, else missing; flagged `age_fixed` | 0 is a placeholder (1,898 main-sample dockets, ~0.4%); 56 remain missing |
 
 Sample flow (2021–2024): 1,207,460 raw rows → 647,564 NYC → 502,989 after dropping disposed/unknown (`analytic.parquet`) → 449,474 main sample (train 193,196; validation 120,457; test 135,821). See `reports/sample_flow.csv` and `notebooks/01_build_sample.ipynb`.

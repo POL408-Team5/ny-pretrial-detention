@@ -58,7 +58,7 @@ CYCLE_COL = "arr_cycle_id"
 SEVERITY_ORDER = ["AF", "BF", "CF", "DF", "EF", "AM", "BM", "UM"]   # top_charge_weight_at_arraign, most serious first
 
 # ---- Identifiers and outcomes (plan v2, section 4) ----
-ID_COL = "case_id"                 # = internal_case_id
+ID_COL = "case_id"                 # = internal_case_id (hex string, not numeric)
 TARGET_Q1 = "y_detain"             # bail set or remanded at arraignment (NOT "actually detained")
 TARGET_Q3 = "y_warrant"            # warrant ordered between arraignment and disposition (released only)
 TARGET_Q3_ALT = "y_rearrest"       # supplementary only
@@ -125,7 +125,7 @@ LEAKAGE_BLOCKLIST = [
     "race", "ethnicity", "age_group", "judge_name",
     # outcomes and sample flags
     "y_detain", "y_warrant", "y_rearrest", "released", "nominal_bail", "bail_posted_at_arraign",
-    "main_sample", "dup_cycle", "excl_case_type", "judge_id_final",
+    "main_sample", "dup_cycle", "excl_case_type", "judge_id_final", "age_fixed",
 ]
 
 # ---- Modeling / evaluation ----

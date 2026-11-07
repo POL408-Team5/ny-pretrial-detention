@@ -1,5 +1,7 @@
 # A2 特征（Xinhui Zong）— 交接文件
 
+> **2026-11-07 更新**：A2-01 至 A2-04 已由 Yiling 完成（见状态表）。Xinhui 从 A2-05 开始；请先读 `src/features.py`、`notebooks/02_features.ipynb` 和 `reports/table1.csv`，并作为这些代码的 reviewer 审 Yiling 的提交。
+
 > 给 AI：先读 `AGENTS.md` 和 `docs/handoff/00_共同须知.md`。你的操作者是 Xinhui，角色 A（数据与特征）中负责特征的部分。
 > 你只能改：`src/features.py`、`notebooks/02_features.ipynb`、本文件末尾的状态表。需要改 `src/config.py`（特征清单、泄露黑名单、阈值）时，写清楚改什么、为什么，交给 Yiling。
 
@@ -48,9 +50,9 @@ def get_X(df, feature_set: str) -> pd.DataFrame
 
 | 任务 | 截止 | 状态 | 日期 | PR |
 |---|---|---|---|---|
-| A2-01 features.py + 测试 | 11/8 | todo | | |
-| A2-02 Table 1 | 11/8 | todo | | |
-| A2-03 缺失与异常 | 11/8 | todo | | |
-| A2-04 字典核对 | 11/8 | todo | | |
+| A2-01 features.py + 测试 | 11/8 | done（Yiling） | 11/7 | |
+| A2-02 Table 1 | 11/8 | done（Yiling） | 11/7 | |
+| A2-03 缺失与异常 | 11/8 | done（Yiling） | 11/7 | |
+| A2-04 字典核对 | 11/8 | done（Yiling） | 11/7 | |
 | A2-05 代理变量 | 11/13 | todo | | |
 | A2-06 deck 页 | 11/19 | todo | | |
