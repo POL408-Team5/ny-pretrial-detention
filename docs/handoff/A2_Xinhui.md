@@ -54,5 +54,5 @@ def get_X(df, feature_set: str) -> pd.DataFrame
 | A2-02 Table 1 | 11/8 | done（Yiling） | 11/7 | |
 | A2-03 缺失与异常 | 11/8 | done（Yiling） | 11/7 | |
 | A2-04 字典核对 | 11/8 | done（Yiling） | 11/7 | |
-| A2-05 代理变量 | 11/13 | todo | | |
+| A2-05 代理变量 | 11/13 | in progress（初稿已合并 11/8） | 11/8 | |
 | A2-06 deck 页 | 11/19 | todo | | |

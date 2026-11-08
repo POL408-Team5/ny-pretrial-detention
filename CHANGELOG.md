@@ -18,6 +18,7 @@
 
 ## A 数据与特征（Yiling Long、Xinhui Zong）
 
+- 2026-11-08 · Yiling Long · 合并 BD-01~04、C-01、A2-05 初稿；notebook 05 加性别增量的配对 bootstrap 区间；新增 `scripts/run_all.sh` 一键复现；更正 C 交接中与测试年规则冲突的要求；更新进度与共同须知 · `scripts/`、`notebooks/05_models_baseline.ipynb`、`docs/`、`AGENTS.md`、`README.md` · 本地合并
 - 2026-11-07 · Xinhui Zong · Started A2-05 with training-only proxy-variable summaries and reviewed feature code · `notebooks/02_features.ipynb` · PR #—
 
 - 2026-11-07 · Yiling Long · [接口] 组内决定：性别移入审计变量（FAIRNESS_GROUPS），新增补充特征组 `CASE_PLUS_GENDER`；`check_leakage` 加 `allow` 参数；测试增至 13 个；待决事项 2–4 已定 · `src/config.py`、`src/features.py`、`tests/`、`notebooks/02_features.ipynb`、`docs/` · PR #—
@@ -28,6 +29,8 @@
 - 2026-11-07 · Yiling Long · [接口] 建立新仓库：方案 v2、AGENTS.md、README、data/README；config 改为 snake_case 列名，定义三组特征、样本规则常量和泄露黑名单 · `docs/项目方案_v2.md`、`AGENTS.md`、`README.md`、`data/README.md`、`src/config.py`、`.gitignore`、`requirements.txt` · PR #—
 
 ## B 基础模型
+
+- 2026-11-08 · Shuyi Niu · 完成 BD-01~04：`fit_and_predict`、预处理、规则基准、指标与 bootstrap 函数及测试；冒烟测试 2023 验证 AUC 0.920（规则 0.846），性别补充组 +0.001 · `src/models.py`、`src/rules.py`、`src/evaluate.py`、`tests/test_models.py`、`tests/test_evaluate.py`、`notebooks/05_models_baseline.ipynb` · 合并于 11/8（Yiling 补记）
 
 ## C 地点与公平
 

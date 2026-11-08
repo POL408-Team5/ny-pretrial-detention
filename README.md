@@ -52,8 +52,7 @@ ny-pretrial-detention/
 
 1. `pip install -r requirements.txt` (Python 3.11)
 2. The raw files are included as `data/raw/NYS for Web <year>.csv.gz` (public data, release listed in `data/README.md`).
-3. `python -m src.build_dataset` → `data/processed/analytic.parquet` and `reports/sample_flow.csv`
-4. Run the notebooks in numeric order.
+3. `bash scripts/run_all.sh` — builds `data/processed/analytic.parquet` and `reports/sample_flow.csv`, runs the tests, and re-executes every notebook in numeric order. (Data only: `python -m src.build_dataset`.)
 
 ## Team
 
@@ -67,4 +66,5 @@ ny-pretrial-detention/
 ## Status
 
 - 2026-11-06: project started; quick profiling of the 2022 file.
-- 2026-11-07: plan v2; repository set up; `src/config.py` updated. Next: sample and feature code (A, 11/8–9).
+- 2026-11-07: plan v2; data (2021–2025) and sample build; feature module and tests.
+- 2026-11-08: baseline modeling framework and smoke test (validation AUC 0.92), county/judge EDA, proxy-variable draft merged; `scripts/run_all.sh` reproduces everything.

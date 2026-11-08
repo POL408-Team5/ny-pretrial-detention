@@ -34,7 +34,7 @@
 
 | 角色 | 负责 | 只属于该角色的文件 | 不做 |
 |---|---|---|---|
-| **A 数据与特征**（Yiling Long：样本、特征、仓库；Xinhui Zong：代理变量说明、deck 页，见交接文件） | 下载与版本记录、样本筛选、标签、匿名 `judge_id`、三组特征、泄露检查、年份划分、样本流程表、Table 1、仓库管理、`AI_Use_Statement.md` 汇总 | `src/config.py`、`src/sample.py`、`src/features.py`、`src/build_dataset.py`、`notebooks/01_build_sample.ipynb`、`notebooks/02_features.ipynb`、`tests/test_features.py`、`data/`（含原始数据）、`docs/`（含 `docs/handoff/`，各人只改自己交接文件的状态表）、`README.md`、`AGENTS.md`、`CLAUDE.md`、`.gitignore`、`requirements.txt` | 不训练模型 |
+| **A 数据与特征**（Yiling Long：样本、特征、仓库；Xinhui Zong：代理变量说明、deck 页，见交接文件） | 下载与版本记录、样本筛选、标签、匿名 `judge_id`、三组特征、泄露检查、年份划分、样本流程表、Table 1、仓库管理、`AI_Use_Statement.md` 汇总 | `src/config.py`、`src/sample.py`、`src/features.py`、`src/build_dataset.py`、`notebooks/01_build_sample.ipynb`、`notebooks/02_features.ipynb`、`tests/test_features.py`、`data/`（含原始数据）、`docs/`（含 `docs/handoff/`，各人只改自己交接文件的状态表）、`scripts/`、`README.md`、`AGENTS.md`、`CLAUDE.md`、`.gitignore`、`requirements.txt` | 不训练模型 |
 | **B 基础模型**（Shuyi Niu，建议） | 训练框架 `fit_and_predict`、预处理管线；Logistic、LASSO、决策树；规则基准 | `src/models.py`、`src/rules.py`、`notebooks/05_models_baseline.ipynb` | 不改特征和指标函数 |
 | **C 地点与公平**（Yixuan Wen，建议） | 法院 / 法官描述；公平性分析；法院 / 法官残差图 | `src/fairness.py`、`notebooks/03_court_judge.ipynb`、`notebooks/08_fairness.ipynb` | 不训练模型，不公开法官姓名 |
 | **D 评估**（Shuyi Niu，建议） | 指标函数、模型比较总表、信息增益与 bootstrap 区间、2024 最终测试；Q3（若做） | `src/evaluate.py`、`notebooks/07_compare_test.ipynb`、`notebooks/10_q3_fta.ipynb` | 不改训练框架 |
@@ -207,5 +207,7 @@ def shap_summary(feature_set, model_name, df) -> ...
 - 已下载并提交（gzip）：2021–2025 原始文件；字典、数据说明、处置层级（11/7 重新下载的字典与 11/6 版完全相同）。
 - 每人的任务、规格、验收标准和状态：`docs/handoff/`。
 - **11/7 已完成 A1-01 至 A1-04**：2021–2025 原始数据已入库（2025 暂不使用）；`python -m src.build_dataset` 生成 `analytic.parquet`（502,989 行，主样本 449,474：训练 193,196 / 验证 120,457 / 测试 135,821）和 `reports/sample_flow.csv`。各人可以开始 EDA。
-- 下一步：A2 写 `features.py`；11/10 全组本地跑通。
+- **11/8 已合并**：BD-01~04（Shuyi：`models.py`、`evaluate.py`、`rules.py`、notebook 05）、C-01（Yixuan：notebook 03、`fairness.py` 中的描述函数）、A2-05 初稿（Xinhui：notebook 02 第 6–7 节）。
+- **整体复现**：在仓库根目录、`pol408` 环境下运行 `bash scripts/run_all.sh`（构建数据 → 全部测试 → 按编号重跑全部 notebook）。
+- 下一步：E-01 EDA（Yanqi）；11/10 全组本地跑通 `scripts/run_all.sh`。
 - 其他角色现在可以做：用假数据先写好自己的函数（接口见 3.3、3.5）。
