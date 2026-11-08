@@ -1,0 +1,6 @@
+period,cohort,n_judges,n,caseload_p10,caseload_p50,caseload_p90,n_judges_ge_min
+Training,All named identities,243,193196,5.200000000000003,265.0,2273.8000000000006,184
+2023,Unseen in training main sample,27,36764,1.0,1166.0,3360.000000000003,19
+2023,Seen in training main sample,169,83693,8.0,178.0,1426.6000000000013,119
+2024,Unseen in training main sample,62,71844,1.0,437.5,3415.5999999999995,36
+2024,Seen in training main sample,152,63977,15.0,158.0,1342.9,102

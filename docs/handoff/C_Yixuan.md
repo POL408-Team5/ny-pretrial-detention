@@ -44,7 +44,7 @@ def residuals(pred_df, df, by: str) -> pd.DataFrame
 
 | 任务 | 截止 | 状态 | 日期 | PR |
 |---|---|---|---|---|
-| C-01 notebook 03 | 11/8 | todo | | |
+| C-01 notebook 03 | 11/8 | done (future outcome comparisons deferred) | 2026-11-08 | [#3](https://github.com/POL408-Team5/ny-pretrial-detention/pull/3) |
 | C-02 fairness.py + 测试 | 11/13 | todo | | |
 | C-03 公平性分析 | 11/18 | todo | | |
 | C-04 残差 | 11/18 | todo | | |
