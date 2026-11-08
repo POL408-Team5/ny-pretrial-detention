@@ -29,7 +29,7 @@
 
 ## C 地点与公平
 
-- 2026-11-08 · Yixuan Wen · 完成 C-01：训练年五县/法官比例、100/200 案门槛覆盖、分层 P10/P50/P90、指控权重×暴力标记间接标准化；未来年份仅做无结果的法官覆盖与案件量汇总；导出 7 张汇总表和 2 张图，notebook 整本运行、21 项测试（含 8 项专项）及独立复算通过 · `src/fairness.py`、`tests/test_fairness.py`、`notebooks/03_court_judge.ipynb`、`reports/c01_*.csv`、`reports/figures/c01_*.png` · PR #待操作者提交
+- 2026-11-08 · Yixuan Wen · 完成 C-01：训练年五县/法官比例、100/200 案门槛覆盖、分层 P10/P50/P90、指控权重×暴力标记间接标准化；未来年份仅做无结果的法官覆盖与案件量汇总；导出 7 张汇总表和 2 张图，notebook 整本运行、21 项测试（含 8 项专项）及独立复算通过 · `src/fairness.py`、`tests/test_fairness.py`、`notebooks/03_court_judge.ipynb`、`reports/c01_*.csv`、`reports/figures/c01_*.png` · PR #3
 
 ## D 评估
 
