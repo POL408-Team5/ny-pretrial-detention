@@ -40,4 +40,4 @@
 
 ## E 复杂模型与解释
 
-- 2026-11-08 · Yanqi Wu · Expanded training-only E-01 EDA with an 18-feature inventory, level distributions, feature relationships, year-to-year drift, small-cell suppression, judge permutation checks, and a review report · `notebooks/04_eda.ipynb`, `reports/e01_*.csv`, `reports/e01_eda_report.md`, `reports/figures/e01_*.png` · PR #—
+- 2026-11-08 · Yanqi Wu · Expanded training-only E-01 EDA with an 18-feature inventory, level distributions, feature relationships, year-to-year drift, small-cell suppression, judge permutation checks, and a review report · `notebooks/04_eda.ipynb`, `reports/e01_*.csv`, `reports/e01_eda_report.md`, `reports/figures/e01_*.png` · PR #5
