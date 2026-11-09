@@ -1,0 +1,85 @@
+feature,level,n,share_pct
+top_severity_at_arraign,Misdemeanor,134180,69.45278370152592
+top_severity_at_arraign,Felony,59016,30.54721629847409
+top_charge_weight_at_arraign,AM,119732,61.97436799933747
+top_charge_weight_at_arraign,DF,20432,10.575788318598729
+top_charge_weight_at_arraign,CF,14555,7.533799871632953
+top_charge_weight_at_arraign,BF,12063,6.24391809354231
+top_charge_weight_at_arraign,UM,11237,5.816373009793163
+top_charge_weight_at_arraign,EF,10483,5.426095778380505
+top_charge_weight_at_arraign,BM,3211,1.6620426923952876
+top_charge_weight_at_arraign,AF,1483,0.7676142363195925
+top_charge_at_arraign_violent_felony_ind,N,159680,82.65181473736516
+top_charge_at_arraign_violent_felony_ind,Y,33516,17.34818526263484
+top_arraign_attempt_indicator,Missing,188327,97.47976148574504
+top_arraign_attempt_indicator,Attempt,4869,2.5202385142549537
+arraign_charge_category,Assault,74311,38.46404687467649
+arraign_charge_category,Larceny,16774,8.682374376281082
+arraign_charge_category,Property,14715,7.616617321269592
+arraign_charge_category,Drug,12912,6.683368185676722
+arraign_charge_category,Criminal Contempt,10883,5.633139402472101
+arraign_charge_category,Criminal Possession of a Weapon,9801,5.073086399304334
+arraign_charge_category,Robbery,8510,4.404853102548707
+arraign_charge_category,Other,7995,4.138284436530777
+arraign_charge_category,Burglary,6872,3.557009461893621
+arraign_charge_category,Unlicensed Operation,6268,3.2443735895153107
+arraign_charge_category,DWI,5367,2.7780078262489907
+arraign_charge_category,Aggravated Harassment,4946,2.560094411892586
+arraign_charge_category,Strangulation,3818,1.9762313919542849
+arraign_charge_category,Other Sex Offense,2646,1.3695935733659081
+arraign_charge_category,Endangering Welfare,1764,0.9130623822439389
+arraign_charge_category,Obstruction,1514,0.7836601171866912
+arraign_charge_category,Homicide Related,1514,0.7836601171866912
+arraign_charge_category,Criminal Trespass,1053,0.5450423404211268
+arraign_charge_category,Rape,807,0.4177105116047951
+arraign_charge_category,Other VTL,717,0.371125696184186
+hate_crime_ind,N,192883,99.83798836414832
+hate_crime_ind,Y,313,0.16201163585167394
+arrest_type,Custody,164648,85.22329654858278
+arrest_type,DAT,28548,14.776703451417214
+case_type,Docket,191247,98.9911799416137
+case_type,Felony Youth Complaint,1949,1.008820058386302
+prior_vfo_cnt,0,158475,82.02809581978923
+prior_vfo_cnt,1,24410,12.634837160189653
+prior_vfo_cnt,2,8597,4.449885090788629
+prior_vfo_cnt,DCJS missing,1714,0.8871819292324893
+prior_nonvfo_cnt,0,145806,75.47050663574815
+prior_nonvfo_cnt,1,23348,12.085136338226464
+prior_nonvfo_cnt,2,10885,5.6341746205925585
+prior_nonvfo_cnt,4,5829,3.017143212074784
+prior_nonvfo_cnt,3,5614,2.9058572641255513
+prior_nonvfo_cnt,DCJS missing,1714,0.8871819292324893
+prior_misd_cnt,0,118334,61.250750533137335
+prior_misd_cnt,1,22420,11.604795130333962
+prior_misd_cnt,10,14783,7.6518147373651635
+prior_misd_cnt,2,11317,5.857781734611483
+prior_misd_cnt,3,6946,3.595312532350566
+prior_misd_cnt,4,4972,2.5735522474585397
+prior_misd_cnt,5,3689,1.9094598231847453
+prior_misd_cnt,6,3059,1.5833661152404814
+prior_misd_cnt,7,2358,1.220522164019959
+prior_misd_cnt,8,2030,1.0507463922648503
+prior_misd_cnt,DCJS missing,1714,0.8871819292324893
+prior_misd_cnt,9,1574,0.8147166608004306
+pend_vfo,0,172900,89.49460651359242
+pend_vfo,1,18582,9.618211557175096
+pend_vfo,DCJS missing,1714,0.8871819292324893
+pend_nonvfo,0,160511,83.08194786641545
+pend_nonvfo,1,30971,16.03087020435206
+pend_nonvfo,DCJS missing,1714,0.8871819292324893
+pend_misd,0,152689,79.0332097973043
+pend_misd,1,38793,20.07960827346322
+pend_misd,DCJS missing,1714,0.8871819292324893
+supervision,0,180613,93.48692519513861
+supervision,1,10870,5.626410484689124
+supervision,DCJS missing,1713,0.8866643201722603
+dcjs_missing,0,191482,99.1128180707675
+dcjs_missing,1,1714,0.8871819292324893
+dat_wo_ws_prior_to_arraign,N,185706,96.12310813888486
+dat_wo_ws_prior_to_arraign,Y,7490,3.876891861115137
+age_at_arrest,25-34,68221,35.31180769788194
+age_at_arrest,35-44,45865,23.740139547402638
+age_at_arrest,18-24,35733,18.49572454916251
+age_at_arrest,45-54,23960,12.401913083086606
+age_at_arrest,55+,17462,9.038489409718627
+age_at_arrest,<18,1928,0.9979502681214931
