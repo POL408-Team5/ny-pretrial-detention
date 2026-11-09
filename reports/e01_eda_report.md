@@ -182,7 +182,7 @@ The gender comparison illustrates why the denominator matters: male dockets have
 
 ## 5. Bail made after a bail-set decision
 
-Among **23,077** main-sample bail-set dockets (nominal bail excluded), **16,433 (71.21%)** have a missing `bail_made_indicator`. The report describes this as **“not recorded as made”** because the calculation uses a missing field. A stronger statement about actual payment would require confirming the field's meaning against the UCS documentation. This field is post-decision and must not enter X.
+Among **23,077** main-sample bail-set dockets (nominal bail excluded), **16,433 (71.21%)** have a missing `bail_made_indicator`. The UCS data dictionary defines `bail_made_indicator` as the type of bail made at the first posting (with `X` for bail made of unknown type), so a missing value means **no posting is recorded**. This agrees with a second field: every one of the 16,433 dockets with a missing indicator also has no recorded date in `days_arraign_bail_set_to_first_posted` (the dictionary's "NULL" when bail was not posted). The figure therefore describes bail **not recorded as posted** in this data release; postings in another court may be missed. Both fields are post-decision and must not enter X. *(Wording updated at merge, 2026-11-09, after checking the dictionary.)*
 
 ## 6. Finding to test next: judge variation
 

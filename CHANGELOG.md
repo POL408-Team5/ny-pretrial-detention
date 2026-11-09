@@ -18,6 +18,7 @@
 
 ## A 数据与特征（Yiling Long、Xinhui Zong）
 
+- 2026-11-09 · Yiling Long · 合并 E-01（PR #5）；按数据字典核实 `bail_made_indicator` 的含义并更新 EDA 报告第 5 节措辞；更新进度与共同须知 · `reports/e01_eda_report.md`、`docs/`、`AGENTS.md` · 本地合并
 - 2026-11-08 · Yiling Long · 合并 BD-01~04、C-01、A2-05 初稿；notebook 05 加性别增量的配对 bootstrap 区间；新增 `scripts/run_all.sh` 一键复现；更正 C 交接中与测试年规则冲突的要求；更新进度与共同须知 · `scripts/`、`notebooks/05_models_baseline.ipynb`、`docs/`、`AGENTS.md`、`README.md` · 本地合并
 - 2026-11-07 · Xinhui Zong · Started A2-05 with training-only proxy-variable summaries and reviewed feature code · `notebooks/02_features.ipynb` · PR #—
 

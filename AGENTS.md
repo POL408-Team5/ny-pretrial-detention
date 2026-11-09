@@ -209,5 +209,6 @@ def shap_summary(feature_set, model_name, df) -> ...
 - **11/7 已完成 A1-01 至 A1-04**：2021–2025 原始数据已入库（2025 暂不使用）；`python -m src.build_dataset` 生成 `analytic.parquet`（502,989 行，主样本 449,474：训练 193,196 / 验证 120,457 / 测试 135,821）和 `reports/sample_flow.csv`。各人可以开始 EDA。
 - **11/8 已合并**：BD-01~04（Shuyi：`models.py`、`evaluate.py`、`rules.py`、notebook 05）、C-01（Yixuan：notebook 03、`fairness.py` 中的描述函数）、A2-05 初稿（Xinhui：notebook 02 第 6–7 节）。
 - **整体复现**：在仓库根目录、`pol408` 环境下运行 `bash scripts/run_all.sh`（构建数据 → 全部测试 → 按编号重跑全部 notebook）。
-- 下一步：E-01 EDA（Yanqi）；11/10 全组本地跑通 `scripts/run_all.sh`。
+- **11/9 已合并**：E-01 EDA（Yanqi：notebook 04、`reports/e01_eda_report.md`）。第一阶段（EDA）全部完成。
+- 下一步：11/9 给老师的邮件（Yiling）；11/10 全组本地跑通 `scripts/run_all.sh`；11/10–14 建模（BD-05、E-02、C-02）。
 - 其他角色现在可以做：用假数据先写好自己的函数（接口见 3.3、3.5）。

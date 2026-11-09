@@ -68,3 +68,4 @@ ny-pretrial-detention/
 - 2026-11-06: project started; quick profiling of the 2022 file.
 - 2026-11-07: plan v2; data (2021–2025) and sample build; feature module and tests.
 - 2026-11-08: baseline modeling framework and smoke test (validation AUC 0.92), county/judge EDA, proxy-variable draft merged; `scripts/run_all.sh` reproduces everything.
+- 2026-11-09: training-year EDA report merged (`reports/e01_eda_report.md`); exploratory phase complete.
