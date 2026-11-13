@@ -72,7 +72,7 @@ def comparison_table(pred_df, split="valid") -> pd.DataFrame   # 行：model；�
 | BD-02 rules.py | 11/8 | done | 11/8 | merged 11/8 |
 | BD-03 evaluate.py + 测试 | 11/8 | done | 11/8 | merged 11/8 |
 | BD-04 冒烟测试 | 11/8 | done | 11/8 | merged 11/8 |
-| BD-05 简单模型 × 三组 | 11/13 | todo | | |
+| BD-05 简单模型 × 三组 | 11/13 | done (local verified; not merged) | 2026-11-12 | pending review |
 | BD-06 比较与选模型 | 11/14 | todo | | |
 | BD-07 测试 | 11/15 | todo | | |
 | BD-08 Q3 | 视进度 | todo | | |

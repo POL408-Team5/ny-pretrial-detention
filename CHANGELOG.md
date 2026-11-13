@@ -31,6 +31,8 @@
 
 ## B 基础模型
 
+- 2026-11-12 · Shuyi Niu · 完成 BD-05：三个简单模型 × 三组主特征及三组性别补充对照；保存训练 OOF/2023 验证预测、调参和矩阵维度汇总；42 项测试及独立复算通过，未使用 2024 测试 · `src/models.py`、`tests/test_models.py`、`notebooks/05_models_baseline.ipynb`、`reports/bd05_*`、`docs/handoff/BD_Shuyi.md` · 待审核
+
 - 2026-11-08 · Shuyi Niu · 完成 BD-01~04：`fit_and_predict`、预处理、规则基准、指标与 bootstrap 函数及测试；冒烟测试 2023 验证 AUC 0.920（规则 0.846），性别补充组 +0.001 · `src/models.py`、`src/rules.py`、`src/evaluate.py`、`tests/test_models.py`、`tests/test_evaluate.py`、`notebooks/05_models_baseline.ipynb` · 合并于 11/8（Yiling 补记）
 
 ## C 地点与公平
