@@ -12,12 +12,13 @@
 |---|---|---|
 | v0.1 | 11/7 | 换题；方案 v2；仓库结构、分工、AI 工作说明 |
 | v0.2 | 11/10 | `analytic.parquet` 可生成，全组本地跑通 |
-| v0.3 | 11/15 | 模型冻结；2024 测试 |
+| v0.3 | 11/16 | 模型冻结；2024 测试 |
 | v0.4 | 11/22 | 数据分析 deck |
 | v1.0 | 12/4 | 期末提交 |
 
 ## A 数据与特征（Yiling Long、Xinhui Zong）
 
+- 2026-11-13 · Yiling Long · 合并 BD-05；建模截止后移（E-02 11/14，BD-06、C-02 11/15，冻结 11/16）；交接文件补课件 Week 6 要点（XGBoost 早停用训练年切片、permutation importance 用测试集、测试报告政策阈值下的混淆矩阵）和不加 SVM 的说明 · `docs/`、`AGENTS.md` · 本地合并
 - 2026-11-09 · Yiling Long · 合并 E-01（PR #5）；按数据字典核实 `bail_made_indicator` 的含义并更新 EDA 报告第 5 节措辞；更新进度与共同须知 · `reports/e01_eda_report.md`、`docs/`、`AGENTS.md` · 本地合并
 - 2026-11-08 · Yiling Long · 合并 BD-01~04、C-01、A2-05 初稿；notebook 05 加性别增量的配对 bootstrap 区间；新增 `scripts/run_all.sh` 一键复现；更正 C 交接中与测试年规则冲突的要求；更新进度与共同须知 · `scripts/`、`notebooks/05_models_baseline.ipynb`、`docs/`、`AGENTS.md`、`README.md` · 本地合并
 - 2026-11-07 · Xinhui Zong · Started A2-05 with training-only proxy-variable summaries and reviewed feature code · `notebooks/02_features.ipynb` · PR #—

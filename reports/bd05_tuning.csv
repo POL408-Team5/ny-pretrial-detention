@@ -9,8 +9,8 @@ logit,CASE_COURT,"{""clf__C"": 1}",0.9369087475471503,0.0016156342707049373,2
 logit,CASE_COURT,"{""clf__C"": 10}",0.9369190679591514,0.0016219074175671752,1
 logit,CASE_COURT_JUDGE,"{""clf__C"": 0.01}",0.9372458558565114,0.0018260574473309306,4
 logit,CASE_COURT_JUDGE,"{""clf__C"": 0.1}",0.9397667336835616,0.0016996102700385374,2
-logit,CASE_COURT_JUDGE,"{""clf__C"": 1}",0.9398207585495063,0.0016499984322942143,1
-logit,CASE_COURT_JUDGE,"{""clf__C"": 10}",0.9397489918783801,0.0016304614661140286,3
+logit,CASE_COURT_JUDGE,"{""clf__C"": 1}",0.939820666926703,0.0016499190294788264,1
+logit,CASE_COURT_JUDGE,"{""clf__C"": 10}",0.9397489930680484,0.0016304635731490122,3
 logit,CASE_PLUS_GENDER,"{""clf__C"": 0.01}",0.936013638716263,0.0018822180188309233,4
 logit,CASE_PLUS_GENDER,"{""clf__C"": 0.1}",0.9379291037741462,0.001735575304508272,3
 logit,CASE_PLUS_GENDER,"{""clf__C"": 1}",0.937999533375649,0.0016479368306969,2
@@ -36,30 +36,30 @@ tree,CASE,"{""clf__max_depth"": 3, ""clf__min_samples_leaf"": 200}",0.8979167746
 tree,CASE,"{""clf__max_depth"": 5, ""clf__min_samples_leaf"": 50}",0.9185051417481176,0.0020292471162132062,6
 tree,CASE,"{""clf__max_depth"": 5, ""clf__min_samples_leaf"": 200}",0.9185063860490394,0.0019869153806999105,5
 tree,CASE,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 50}",0.9334218673677424,0.0019856871691205074,3
-tree,CASE,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 200}",0.9331780610048941,0.002132924766194599,4
-tree,CASE,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 50}",0.935633992671133,0.0017353016673180132,2
+tree,CASE,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 200}",0.9331817883862545,0.0021270627828399655,4
+tree,CASE,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 50}",0.9356343948595425,0.0017355095018112417,2
 tree,CASE,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 200}",0.9359330616187508,0.0020259886867701623,1
 tree,CASE_COURT,"{""clf__max_depth"": 3, ""clf__min_samples_leaf"": 50}",0.8979167746695168,0.0018322510169302055,7
 tree,CASE_COURT,"{""clf__max_depth"": 3, ""clf__min_samples_leaf"": 200}",0.8979167746695168,0.0018322510169302055,7
 tree,CASE_COURT,"{""clf__max_depth"": 5, ""clf__min_samples_leaf"": 50}",0.9186306134413262,0.0020177224959949417,6
 tree,CASE_COURT,"{""clf__max_depth"": 5, ""clf__min_samples_leaf"": 200}",0.9186354316266769,0.0020001363940545455,5
 tree,CASE_COURT,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 50}",0.9336972784769495,0.00208539220080626,3
-tree,CASE_COURT,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 200}",0.9333094836606067,0.002251883819291085,4
-tree,CASE_COURT,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 50}",0.9360407700393886,0.0015679942335321188,2
-tree,CASE_COURT,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 200}",0.9363466413632107,0.002053127559541858,1
+tree,CASE_COURT,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 200}",0.9333131818901235,0.0022459441956573824,4
+tree,CASE_COURT,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 50}",0.9360411704429381,0.0015686162015153544,2
+tree,CASE_COURT,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 200}",0.9363496791945994,0.002047556828491389,1
 tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 3, ""clf__min_samples_leaf"": 50}",0.8979167746695168,0.0018322510169302055,7
 tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 3, ""clf__min_samples_leaf"": 200}",0.8979167746695168,0.0018322510169302055,7
 tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 5, ""clf__min_samples_leaf"": 50}",0.9186306134413262,0.0020177224959949417,6
 tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 5, ""clf__min_samples_leaf"": 200}",0.9186354316266769,0.0020001363940545455,5
-tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 50}",0.9336455224051006,0.002094558531886434,3
-tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 200}",0.9333094836606067,0.002251883819291085,4
-tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 50}",0.935879281114268,0.0015674604928511905,2
-tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 200}",0.9363766962681972,0.0018756969093807654,1
+tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 50}",0.9336458936559401,0.002094978669597421,3
+tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 200}",0.9333131818901235,0.0022459441956573824,4
+tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 50}",0.9358809951746343,0.0015654003125106838,2
+tree,CASE_COURT_JUDGE,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 200}",0.9363766201141785,0.0018758359686427346,1
 tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 3, ""clf__min_samples_leaf"": 50}",0.8976482160953768,0.0018833785694649203,7
 tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 3, ""clf__min_samples_leaf"": 200}",0.8976482160953768,0.0018833785694649203,7
 tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 5, ""clf__min_samples_leaf"": 50}",0.919605293083751,0.0019550267282026712,6
 tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 5, ""clf__min_samples_leaf"": 200}",0.9196074494052349,0.001921535454214233,5
 tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 50}",0.9342304745091576,0.001975894696945929,3
 tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 8, ""clf__min_samples_leaf"": 200}",0.9335534940686856,0.0019323224165311388,4
-tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 50}",0.9364185039998633,0.002088875795402241,2
+tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 50}",0.9364213407370471,0.002083676046030938,2
 tree,CASE_PLUS_GENDER,"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 200}",0.9365143870788343,0.00205126077497134,1

@@ -23,7 +23,7 @@
 - **任务**：二分类，`y_detain` = 设保释或收押（1）vs 无条件释放 / 非金钱条件释放（0）。**它不是“实际被羁押”。**
 - **三组特征**：`CASE` ⊂ `CASE_COURT` ⊂ `CASE_COURT_JUDGE`（见 `src/config.py`）。性别和种族一样只用于审计；补充特征组 `CASE_PLUS_GENDER`（CASE + 性别）只用来看性别能多解释多少，不参加嵌套比较。
 - **模型**：Logistic、LASSO Logistic、决策树、随机森林、XGBoost；规则基准。
-- **划分**：2021–2022 训练（交叉验证调参）；2023 验证（选模型、定阈值）；2024 测试（11/15 冻结后只跑一次）。
+- **划分**：2021–2022 训练（交叉验证调参）；2023 验证（选模型、定阈值）；2024 测试（11/16 冻结后只跑一次）。
 - **解释与公平性**：SHAP；按种族的校准、FPR / FNR；法院 / 法官残差（匿名）。
 - **不做**：因果推断、评价保释改革、法官实名排名、全州分析。Q3（未到庭）和聚类等主结果跑通后再定。
 - **节点**：11/22 数据分析 deck · 12/2–3 汇报 · 12/4 提交仓库、slides、AI Use Statement。
@@ -210,5 +210,6 @@ def shap_summary(feature_set, model_name, df) -> ...
 - **11/8 已合并**：BD-01~04（Shuyi：`models.py`、`evaluate.py`、`rules.py`、notebook 05）、C-01（Yixuan：notebook 03、`fairness.py` 中的描述函数）、A2-05 初稿（Xinhui：notebook 02 第 6–7 节）。
 - **整体复现**：在仓库根目录、`pol408` 环境下运行 `bash scripts/run_all.sh`（构建数据 → 全部测试 → 按编号重跑全部 notebook）。
 - **11/9 已合并**：E-01 EDA（Yanqi：notebook 04、`reports/e01_eda_report.md`）。第一阶段（EDA）全部完成。
-- 下一步：11/9 给老师的邮件（Yiling）；11/10 全组本地跑通 `scripts/run_all.sh`；11/10–14 建模（BD-05、E-02、C-02）。
+- **11/13 已合并**：BD-05（Shuyi：logit、LASSO、决策树 × 三组特征及性别补充组，`reports/bd05_*`）。验证集 AUC 0.920–0.924，规则基准 0.847。notebook 05 现在重训 12 个模型，`run_all.sh` 全程约 45 分钟。
+- 下一步：E-02 11/14；BD-06 选模型、C-02 11/15；11/16 冻结并跑 2024 测试；11/19 deck 各页交 Yanqi；11/22 提交。
 - 其他角色现在可以做：用假数据先写好自己的函数（接口见 3.3、3.5）。

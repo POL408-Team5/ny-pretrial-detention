@@ -19,7 +19,7 @@
 4. 2023、2024 年由 `unseen` 法官审理的案件占比（A1 已算出 2023 年约 30%，按月从 2 月起上升）；在法官层面只描述人数和案件量。**不比较新老法官的羁押率**：那需要 2023/2024 年的结果，和测试年规则冲突（11/8 更正）
 5. 产出 1–2 张可放进 deck 的图（如法官羁押率的毛毛虫图，按 `judge_id`），与 Yanqi 商量谁的图做 EDA 发现页
 
-### C-02 `src/fairness.py`（11/11–13）
+### C-02 `src/fairness.py`（11/15 周日前）
 ```python
 def choose_threshold(y_prob_valid, y_true_valid) -> float
     # 默认规则：使 2023 年预测为 1 的比例 = 2023 年实际 y_detain 比例 [定]
@@ -32,7 +32,7 @@ def residuals(pred_df, df, by: str) -> pd.DataFrame
 指标函数调用 Shuyi 的 `src/evaluate.py`，不重写。写 `tests/test_fairness.py`（小样本手算核对 FPR / FNR）。
 
 ### C-03 公平性分析（验证集 11/14；测试集 11/16–18）
-`notebooks/08_fairness.ipynb`：按 `race`、`ethnicity`、`gender`、`age_group` 的 `group_metrics`；分组校准图；`CASE` 与 `CASE_COURT_JUDGE` 两个模型都做，看加入法官后组间差距是否变化。测试集结果要等 Shuyi 11/15 跑完。
+`notebooks/08_fairness.ipynb`：按 `race`、`ethnicity`、`gender`、`age_group` 的 `group_metrics`；分组校准图；`CASE` 与 `CASE_COURT_JUDGE` 两个模型都做，看加入法官后组间差距是否变化。测试集结果要等 Shuyi 11/16 跑完。
 
 ### C-04 残差（11/16–18）
 县和法官的残差图（`CASE` 组最终模型）：哪些法官比“同样案件的平均预测”系统性偏高或偏低，附区间；只显示 `judge_id`。
@@ -45,7 +45,7 @@ def residuals(pred_df, df, by: str) -> pd.DataFrame
 | 任务 | 截止 | 状态 | 日期 | PR |
 |---|---|---|---|---|
 | C-01 notebook 03 | 11/8 | done (future outcome comparisons deferred) | 2026-11-08 | [#3](https://github.com/POL408-Team5/ny-pretrial-detention/pull/3) |
-| C-02 fairness.py + 测试 | 11/13 | todo | | |
+| C-02 fairness.py + 测试 | 11/15 | todo | | |
 | C-03 公平性分析 | 11/18 | todo | | |
 | C-04 残差 | 11/18 | todo | | |
 | C-05 deck 页 | 11/19 | todo | | |

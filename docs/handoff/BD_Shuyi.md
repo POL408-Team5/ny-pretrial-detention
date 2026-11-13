@@ -7,7 +7,7 @@
 
 - 你写的 `fit_and_predict` 和指标函数是全组共用的：E 调用它训练 RF / XGBoost，C 调用指标函数做公平性。**签名一旦发布不要随便改**（改要走 `AGENTS.md` 3.6）。
 - 输入：`analytic.parquet` 中 `main_sample == True` 的行；特征用 Xinhui 的 `features.get_X(df, feature_set)`。
-- 2024 测试集**只在 11/15 冻结后由你跑一次**。
+- 2024 测试集**只在 11/16（周一）冻结后由你跑一次**。
 
 ## 任务
 
@@ -52,11 +52,13 @@ def comparison_table(pred_df, split="valid") -> pd.DataFrame   # 行：model；�
 ### BD-05 三个简单模型 × 三组特征（11/10–13）
 输出 `data/processed/predictions_baseline.parquet`（另加 `CASE_PLUS_GENDER` 作为补充组）；notebook 05 报告验证集结果。
 
-### BD-06 比较与选模型（11/14）
+### BD-06 比较与选模型（11/15 周日前）
 `notebooks/07_compare_test.ipynb`：合并 E 的预测，验证集比较表（五模型 + 规则 × 三组特征）；`CASE` → `CASE_COURT` → `CASE_COURT_JUDGE` 的 AUC 增量（配对 bootstrap 区间），**同时报告只含已编码法官（`judge_id` 以 J 开头）的案件**——2023 年约 30% 是 `unseen` 法官；校准图。全组据此选最终模型。
 
-### BD-07 冻结后测试（11/15，只跑一次）
-`run_test=True` 跑选定模型 × 三组特征（重新拟合用 2021–2023，`CASE_COURT_JUDGE` 组用 `config.JUDGE_COL_FINAL` 代替 `judge_id`）；测试集比较表、信息增益图（附区间）、校准图，存 `reports/`。跑完在群里通知，之后不再改模型。
+不加 SVM：线性 SVM 在 `CASE` 上验证集 AUC 0.918 / AP 0.658，logit 为 0.920 / 0.663，没有更好，而且不直接给概率（阈值和校准都要用概率）。deck 里一句话说明即可。
+
+### BD-07 冻结后测试（11/16，只跑一次）
+`run_test=True` 跑选定模型 × 三组特征（重新拟合用 2021–2023，`CASE_COURT_JUDGE` 组用 `config.JUDGE_COL_FINAL` 代替 `judge_id`）；测试集比较表（AUC、AP、Brier）、信息增益图（附区间）、校准图，以及**政策阈值（C-02 在 2023 年定的阈值）下的混淆矩阵**（课件 Week 6 的测试步骤），存 `reports/`。措辞按“预测”写，不写成因果效应。跑完在群里通知，之后不再改模型。
 
 ### BD-08 Q3（11/23 之后，视进度）
 在 `released == 1` 的人中预测 `y_warrant`；注意观察窗口到处置为止长短不一、未结案件。开工前先和 Yiling 定样本。
@@ -72,8 +74,8 @@ def comparison_table(pred_df, split="valid") -> pd.DataFrame   # 行：model；�
 | BD-02 rules.py | 11/8 | done | 11/8 | merged 11/8 |
 | BD-03 evaluate.py + 测试 | 11/8 | done | 11/8 | merged 11/8 |
 | BD-04 冒烟测试 | 11/8 | done | 11/8 | merged 11/8 |
-| BD-05 简单模型 × 三组 | 11/13 | done (local verified; not merged) | 2026-11-12 | pending review |
-| BD-06 比较与选模型 | 11/14 | todo | | |
-| BD-07 测试 | 11/15 | todo | | |
+| BD-05 简单模型 × 三组 | 11/13 | done（11/13 合并） | 2026-11-12 | 本地合并 |
+| BD-06 比较与选模型 | 11/15 | todo | | |
+| BD-07 测试 | 11/16 | todo | | |
 | BD-08 Q3 | 视进度 | todo | | |
 | BD-09 deck 页 | 11/19 | todo | | |

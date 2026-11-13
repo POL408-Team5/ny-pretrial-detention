@@ -41,7 +41,7 @@ Outputs `data/processed/analytic.parquet` (one row per docket after the NYC / de
 
 ## Test-year protocol
 
-2024 is the test year. Before the 11/15 freeze, no outcome statistic (`y_detain`, release decisions, nominal-bail share) is computed for 2024: `src/sample.diagnostics()`, notebook 01 and Table 1 exclude it. Sample counts, feature distributions and judge-coding shares for 2024 are shown because they do not involve the outcome. Disclosure: on 2026-11-07, before this rule was added, the build printed the 2024 main-sample `y_detain` rate once (about 12%); no model was fit or evaluated on 2024.
+2024 is the test year. Before the 11/16 freeze (moved from 11/15 on 11/13), no outcome statistic (`y_detain`, release decisions, nominal-bail share) is computed for 2024: `src/sample.diagnostics()`, notebook 01 and Table 1 exclude it. Sample counts, feature distributions and judge-coding shares for 2024 are shown because they do not involve the outcome. Disclosure: on 2026-11-07, before this rule was added, the build printed the 2024 main-sample `y_detain` rate once (about 12%); no model was fit or evaluated on 2024.
 
 ## Processing decisions
 
