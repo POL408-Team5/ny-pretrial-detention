@@ -52,7 +52,7 @@ def permutation_importance_table(feature_set, model_name, df) -> pd.DataFrame
 | 任务 | 截止 | 状态 | 日期 | PR |
 |---|---|---|---|---|
 | E-01 EDA 与发现页 | 11/8 | done（11/9 合并） | 2026-11-08 | #5 |
-| E-02 RF / XGBoost × 三组 | 11/14 | todo | | |
+| E-02 RF / XGBoost × 三组 | 11/14 | done（本地完成，待审核） | 2026-11-14 | — |
 | E-03 SHAP 与 permutation | 11/18 | todo | | |
 | E-04 deck 整合 | 11/21 | todo | | |
 | E-05 聚类 | 视进度 | todo | | |
