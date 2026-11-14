@@ -211,5 +211,6 @@ def shap_summary(feature_set, model_name, df) -> ...
 - **整体复现**：在仓库根目录、`pol408` 环境下运行 `bash scripts/run_all.sh`（构建数据 → 全部测试 → 按编号重跑全部 notebook）。
 - **11/9 已合并**：E-01 EDA（Yanqi：notebook 04、`reports/e01_eda_report.md`）。第一阶段（EDA）全部完成。
 - **11/13 已合并**：BD-05（Shuyi：logit、LASSO、决策树 × 三组特征及性别补充组，`reports/bd05_*`）。验证集 AUC 0.920–0.924，规则基准 0.847。notebook 05 现在重训 12 个模型，`run_all.sh` 全程约 45 分钟。
+- **11/13 A1**：敏感性检查完成（`reports/a106_sensitivity_report.md`，结论不变）；法律背景与文献核实（`docs/背景与文献核实.md`）。
 - 下一步：E-02 11/14；BD-06 选模型、C-02 11/15；11/16 冻结并跑 2024 测试；11/19 deck 各页交 Yanqi；11/22 提交。
 - 其他角色现在可以做：用假数据先写好自己的函数（接口见 3.3、3.5）。

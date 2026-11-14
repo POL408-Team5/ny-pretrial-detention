@@ -18,6 +18,7 @@
 
 ## A 数据与特征（Yiling Long、Xinhui Zong）
 
+- 2026-11-13 · Yiling Long · [接口] A1-06：`build_sample` 加两个开关参数（默认取 config，主样本不变）；`config.SENSITIVITY_VARIANTS`；`build_dataset --sensitivity`；新增 `src/sensitivity.py` 和验证集结果；A1-07 法律背景与文献核实 · `src/`、`reports/a106_*`、`reports/sample_flow_*`、`docs/背景与文献核实.md`、`README.md` · 本地合并
 - 2026-11-13 · Yiling Long · 合并 BD-05；建模截止后移（E-02 11/14，BD-06、C-02 11/15，冻结 11/16）；交接文件补课件 Week 6 要点（XGBoost 早停用训练年切片、permutation importance 用测试集、测试报告政策阈值下的混淆矩阵）和不加 SVM 的说明 · `docs/`、`AGENTS.md` · 本地合并
 - 2026-11-09 · Yiling Long · 合并 E-01（PR #5）；按数据字典核实 `bail_made_indicator` 的含义并更新 EDA 报告第 5 节措辞；更新进度与共同须知 · `reports/e01_eda_report.md`、`docs/`、`AGENTS.md` · 本地合并
 - 2026-11-08 · Yiling Long · 合并 BD-01~04、C-01、A2-05 初稿；notebook 05 加性别增量的配对 bootstrap 区间；新增 `scripts/run_all.sh` 一键复现；更正 C 交接中与测试年规则冲突的要求；更新进度与共同须知 · `scripts/`、`notebooks/05_models_baseline.ipynb`、`docs/`、`AGENTS.md`、`README.md` · 本地合并

@@ -173,12 +173,22 @@ def _judge_ids(df: pd.DataFrame, fit_years: list[int]) -> pd.Series:
     return ids.astype("string")
 
 
-def build_sample(raw: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+def build_sample(
+    raw: pd.DataFrame,
+    exclude_nominal_bail: bool | None = None,
+    dedup_arrest_cycle: bool | None = None,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Apply S1-S6, build outcomes, flags, judge_id, age_group and split.
 
     Returns (analytic, sample_flow). `analytic` keeps every row after S3;
-    use `main_sample` to select the modeling sample.
+    use `main_sample` to select the modeling sample. The two switches default to
+    config.EXCLUDE_NOMINAL_BAIL / config.DEDUP_ARREST_CYCLE; the A1-06 sensitivity
+    versions (config.SENSITIVITY_VARIANTS) turn one of them off.
     """
+    if exclude_nominal_bail is None:
+        exclude_nominal_bail = config.EXCLUDE_NOMINAL_BAIL
+    if dedup_arrest_cycle is None:
+        dedup_arrest_cycle = config.DEDUP_ARREST_CYCLE
     years = sorted(raw[config.YEAR_COL].dropna().unique().tolist())
     s0 = raw.attrs.get("s0_counts")
     if s0:  # load_raw(nyc_only=True) already applied S1
@@ -235,13 +245,13 @@ def build_sample(raw: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     keep = df["excl_case_type"].eq(0)
     flow.append(_flow_row("S4", f"Case type in {config.CASE_TYPES_MAIN}", df[keep], years))
 
-    if config.EXCLUDE_NOMINAL_BAIL:
+    if exclude_nominal_bail:
         keep &= df["nominal_bail"].eq(0)
         flow.append(_flow_row("S5", f"Drop nominal bail (all first bail amounts <= ${config.NOMINAL_BAIL_MAX:g})",
                               df[keep], years))
 
     df["dup_cycle"] = _dedup_cycles(df, keep)
-    if config.DEDUP_ARREST_CYCLE:
+    if dedup_arrest_cycle:
         keep &= df["dup_cycle"].eq(0)
         flow.append(_flow_row("S6", "One docket per arr_cycle_id (earliest year, then most serious charge)", df[keep], years))
 

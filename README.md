@@ -53,6 +53,7 @@ ny-pretrial-detention/
 1. `pip install -r requirements.txt` (Python 3.11)
 2. The raw files are included as `data/raw/NYS for Web <year>.csv.gz` (public data, release listed in `data/README.md`).
 3. `bash scripts/run_all.sh` — builds `data/processed/analytic.parquet` and `reports/sample_flow.csv`, runs the tests, and re-executes every notebook in numeric order. (Data only: `python -m src.build_dataset`.)
+4. Optional sensitivity check (A1-06, about 15 minutes): `python -m src.build_dataset --sensitivity` then `python -m src.sensitivity`; results in `reports/a106_sensitivity_report.md`.
 
 ## Team
 
@@ -69,3 +70,4 @@ ny-pretrial-detention/
 - 2026-11-07: plan v2; data (2021–2025) and sample build; feature module and tests.
 - 2026-11-08: baseline modeling framework and smoke test (validation AUC 0.92), county/judge EDA, proxy-variable draft merged; `scripts/run_all.sh` reproduces everything.
 - 2026-11-09: training-year EDA report merged (`reports/e01_eda_report.md`); exploratory phase complete.
+- 2026-11-13: baseline models merged (validation AUC 0.920–0.924); sample-rule sensitivity checks; legal background and literature verified (`docs/背景与文献核实.md`).

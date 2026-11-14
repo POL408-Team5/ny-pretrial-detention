@@ -44,6 +44,8 @@ def build_sample(raw) -> tuple[pd.DataFrame, pd.DataFrame]   # (analytic 行, sa
 ### A1-06 敏感性数据（11/10–14）
 用 config 开关生成：名义保释计为 1、不去重两个版本；交给 Shuyi 用 `fit_and_predict` 跑同一个最终模型。
 
+11/13 完成：`python -m src.build_dataset --sensitivity` 生成两个版本；`python -m src.sensitivity [--model 名]` 在 2023 年上比较（模型存 `models/sensitivity/`，不覆盖主模型）。结果见 `reports/a106_sensitivity_report.md`：去重几乎无影响（只多 81 个案卷）；名义保释计为 1 使 AUC 降约 0.04，但三组特征的排序和法官增量不变。
+
 ### A1-07 deck（11/16–19）
 问题与背景、数据与样本流程、局限；核实法律背景和文献（`docs/项目方案_v2.md` 附录）。
 
@@ -58,7 +60,7 @@ def build_sample(raw) -> tuple[pd.DataFrame, pd.DataFrame]   # (analytic 行, sa
 | A1-02 build_dataset.py | 11/7 | done | 11/7 | |
 | A1-03 notebook 01 | 11/8 | done | 11/7 | |
 | A1-04 2024 数据与新字典 | 11/8 | done | 11/7 | |
-| A1-05 给老师的邮件 | 11/9 | todo | | |
-| A1-06 敏感性数据 | 11/14 | todo | | |
-| A1-07 deck 页 | 11/19 | todo | | |
+| A1-05 给老师的邮件 | 11/9 | done（改为 summary 附件） | 11/10 | |
+| A1-06 敏感性数据 | 11/14 | done（数据 + logit 验证集结果；最终模型冻结后可重跑） | 11/13 | 本地合并 |
+| A1-07 deck 页 | 11/19 | 法律与文献已核实（`docs/背景与文献核实.md`）；页面待做 | 11/13 | |
 | A1-08 提交 | 12/4 | todo | | |

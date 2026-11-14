@@ -1,0 +1,8 @@
+step,rule,2021,2022,2023,2024,total
+S0,All rows in the raw files,246202,286588,324619,350051,1207460
+S1,"NYC counties (New York, Kings, Bronx, Queens, Richmond)",124264,150585,175658,197057,647564
+S2,Drop cases disposed at arraignment (no release decision),103086,123089,141384,157741,525300
+S3,Drop unknown release decisions (= rows in analytic.parquet),99620,117294,135082,150993,502989
+S4,"Case type in ['Docket', 'Felony Youth Complaint']",93006,107876,124892,141002,466776
+S6,"One docket per arr_cycle_id (earliest year, then most serious charge)",92979,107861,124863,140974,466677
+MAIN,Main sample,92979,107861,124863,140974,466677

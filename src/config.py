@@ -54,6 +54,12 @@ BAIL_AMOUNT_COLS = [
 ]
 EXCLUDE_NOMINAL_BAIL = True        # [decide] main sample drops nominal bail; sensitivity keeps it as 1
 DEDUP_ARREST_CYCLE = True          # [decide] keep the most serious docket per arr_cycle_id
+# A1-06 sensitivity versions: same pipeline, one rule switched off each time.
+# Written to data/processed/analytic_{name}.parquet and reports/sample_flow_{name}.csv.
+SENSITIVITY_VARIANTS = {
+    "nominal_as_detain": {"exclude_nominal_bail": False},   # keep nominal bail; it is Bail-set, so y_detain = 1
+    "no_dedup": {"dedup_arrest_cycle": False},              # keep every docket of an arrest cycle
+}
 CYCLE_COL = "arr_cycle_id"
 SEVERITY_ORDER = ["AF", "BF", "CF", "DF", "EF", "AM", "BM", "UM"]   # top_charge_weight_at_arraign, most serious first
 
