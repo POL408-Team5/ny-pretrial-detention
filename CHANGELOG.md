@@ -43,6 +43,8 @@
 
 ## D 评估
 
+- 2026-11-15 · Shuyi Niu · 完成 BD-06：最终早停预测接入、五模型×三组主特征及规则比较、全验证集与已编码法官子样本、1,000 次配对 bootstrap 区间和校准；54 项检查及独立复算通过，建议 XGBoost，待全组冻结，未使用 2024 · `src/evaluate.py`、`tests/test_evaluate.py`、`notebooks/07_compare_test.ipynb`、`reports/bd06_*`、`reports/figures/bd06_*`、个人状态表 · 待审核
+
 ## E 复杂模型与解释
 
 - 2026-11-14 · Yanqi Wu · Completed E-02: full-data RF / XGBoost grids; training-fold-only XGBoost early stopping followed by full-fold refits; OOF/validation metrics, stopping diagnostics, reproducible safeguards and review report · `src/models_ensemble.py`, `notebooks/06_models_ensemble.ipynb`, `reports/e02_*`, `reports/figures/e02_auc_comparison.png` · PR #7 (Closes #6)

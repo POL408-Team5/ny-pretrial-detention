@@ -1,0 +1,211 @@
+{
+  "analysis_date": "2026-11-15",
+  "main_commit": "81c4231df95a91e0c8440fd53171f4e98e2eb96c",
+  "ensemble_source_commit": "51dd03b39aaf6fd5f76aa3d505b809f69f398232",
+  "ensemble_source_pr": "https://github.com/POL408-Team5/ny-pretrial-detention/pull/7",
+  "ensemble_release": "https://github.com/POL408-Team5/ny-pretrial-detention/releases/tag/e02-pr7-early-stopping",
+  "baseline_sha256": "ab98045337c31d9d368174f6740a74cdfd1eb694597241048715e1dac9c918c3",
+  "ensemble_sha256": "a8bddd0e548fd814954a47aa139e04bcd90fce5a039b12a054c59233a53ba908",
+  "ensemble_manifest_sha256": "91f2f128e9f60377e653e129e2ed4b742b74c920455800614990f0dd71af3fab",
+  "python": "3.11.18",
+  "packages": {
+    "pandas": "3.1.1",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.1",
+    "pyarrow": "26.0.1",
+    "matplotlib": "3.11.2"
+  },
+  "bootstrap_draws": 1000,
+  "bootstrap_seed": 408,
+  "early_stopping": [
+    {
+      "model": "xgb",
+      "feature_set": "CASE",
+      "ceiling": 2000,
+      "patience": 50,
+      "selected_n_estimators_": 470,
+      "early_stopping_best_score_": 0.189579545291352,
+      "early_stopping_rounds_trained_": 520,
+      "early_stopping_fit_n_": 154556,
+      "early_stopping_valid_n_": 38640,
+      "refit_n_": 193196,
+      "stopped_early_": true
+    },
+    {
+      "model": "xgb",
+      "feature_set": "CASE_COURT",
+      "ceiling": 2000,
+      "patience": 50,
+      "selected_n_estimators_": 651,
+      "early_stopping_best_score_": 0.1871267316444669,
+      "early_stopping_rounds_trained_": 701,
+      "early_stopping_fit_n_": 154556,
+      "early_stopping_valid_n_": 38640,
+      "refit_n_": 193196,
+      "stopped_early_": true
+    },
+    {
+      "model": "xgb",
+      "feature_set": "CASE_COURT_JUDGE",
+      "ceiling": 2000,
+      "patience": 50,
+      "selected_n_estimators_": 878,
+      "early_stopping_best_score_": 0.181059400972203,
+      "early_stopping_rounds_trained_": 928,
+      "early_stopping_fit_n_": 154556,
+      "early_stopping_valid_n_": 38640,
+      "refit_n_": 193196,
+      "stopped_early_": true
+    }
+  ],
+  "model_specs": {
+    "main_commit": "81c4231df95a91e0c8440fd53171f4e98e2eb96c",
+    "ensemble_source_commit": "51dd03b39aaf6fd5f76aa3d505b809f69f398232",
+    "models": [
+      {
+        "model": "logit",
+        "feature_set": "CASE",
+        "params": {
+          "clf__C": 1
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "logit",
+        "feature_set": "CASE_COURT",
+        "params": {
+          "clf__C": 10
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "logit",
+        "feature_set": "CASE_COURT_JUDGE",
+        "params": {
+          "clf__C": 1
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "lasso",
+        "feature_set": "CASE",
+        "params": {
+          "clf__C": 1
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "lasso",
+        "feature_set": "CASE_COURT",
+        "params": {
+          "clf__C": 1
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "lasso",
+        "feature_set": "CASE_COURT_JUDGE",
+        "params": {
+          "clf__C": 1
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "tree",
+        "feature_set": "CASE",
+        "params": {
+          "clf__max_depth": 12,
+          "clf__min_samples_leaf": 200
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "tree",
+        "feature_set": "CASE_COURT",
+        "params": {
+          "clf__max_depth": 12,
+          "clf__min_samples_leaf": 200
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "tree",
+        "feature_set": "CASE_COURT_JUDGE",
+        "params": {
+          "clf__max_depth": 12,
+          "clf__min_samples_leaf": 200
+        },
+        "source": "baseline"
+      },
+      {
+        "model": "rf",
+        "feature_set": "CASE",
+        "params": {
+          "clf__max_depth": null,
+          "clf__min_samples_leaf": 20
+        },
+        "source": "ensemble"
+      },
+      {
+        "model": "rf",
+        "feature_set": "CASE_COURT",
+        "params": {
+          "clf__max_depth": null,
+          "clf__min_samples_leaf": 20
+        },
+        "source": "ensemble"
+      },
+      {
+        "model": "rf",
+        "feature_set": "CASE_COURT_JUDGE",
+        "params": {
+          "clf__max_depth": null,
+          "clf__min_samples_leaf": 20
+        },
+        "source": "ensemble"
+      },
+      {
+        "model": "xgb",
+        "feature_set": "CASE",
+        "params": {
+          "clf__learning_rate": 0.05,
+          "clf__max_depth": 5,
+          "clf__subsample": 0.8
+        },
+        "source": "ensemble"
+      },
+      {
+        "model": "xgb",
+        "feature_set": "CASE_COURT",
+        "params": {
+          "clf__learning_rate": 0.05,
+          "clf__max_depth": 5,
+          "clf__subsample": 0.8
+        },
+        "source": "ensemble"
+      },
+      {
+        "model": "xgb",
+        "feature_set": "CASE_COURT_JUDGE",
+        "params": {
+          "clf__learning_rate": 0.05,
+          "clf__max_depth": 7,
+          "clf__subsample": 0.8
+        },
+        "source": "ensemble"
+      }
+    ]
+  },
+  "metadata_source": "development years rebuilt with unchanged team sample code; every flow step matched",
+  "development_counts": {
+    "2021": 89189,
+    "2022": 104007,
+    "2023": 120457
+  },
+  "prediction_rows_supplied": 5959407,
+  "all_case_ids_labels_and_years_matched": true,
+  "ensemble_metric_rows_recomputed": 12,
+  "ensemble_metric_max_error": 1.1102230246251565e-16,
+  "baseline_main_validation_metric_max_error": 1.1797784971179226e-12,
+  "baseline_note": "Original BD-05 local predictions retained. Main validation scores reproduce; supplementary gender and version-sensitive OOF values do not select the main model."
+}
