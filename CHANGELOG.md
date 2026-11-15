@@ -43,6 +43,8 @@
 
 ## D 评估
 
+- 2026-11-15 · Shuyi Niu · 完成 BD-06：最终早停预测接入、五模型×三组主特征及规则比较、全验证集与已编码法官子样本、1,000 次配对 bootstrap 区间和校准；54 项检查及独立复算通过，建议 XGBoost，待全组冻结，未使用 2024 · `src/evaluate.py`、`tests/test_evaluate.py`、`notebooks/07_compare_test.ipynb`、`reports/bd06_*`、`reports/figures/bd06_*`、个人状态表 · 待审核
+
 ## E 复杂模型与解释
 
 - 2026-11-08 · Yanqi Wu · Expanded training-only E-01 EDA with an 18-feature inventory, level distributions, feature relationships, year-to-year drift, small-cell suppression, judge permutation checks, and a review report · `notebooks/04_eda.ipynb`, `reports/e01_*.csv`, `reports/e01_eda_report.md`, `reports/figures/e01_*.png` · PR #5

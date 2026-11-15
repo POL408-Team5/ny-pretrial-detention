@@ -1,0 +1,138 @@
+{
+  "main_commit": "81c4231df95a91e0c8440fd53171f4e98e2eb96c",
+  "ensemble_source_commit": "51dd03b39aaf6fd5f76aa3d505b809f69f398232",
+  "models": [
+    {
+      "model": "logit",
+      "feature_set": "CASE",
+      "params": {
+        "clf__C": 1
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "logit",
+      "feature_set": "CASE_COURT",
+      "params": {
+        "clf__C": 10
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "logit",
+      "feature_set": "CASE_COURT_JUDGE",
+      "params": {
+        "clf__C": 1
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "lasso",
+      "feature_set": "CASE",
+      "params": {
+        "clf__C": 1
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "lasso",
+      "feature_set": "CASE_COURT",
+      "params": {
+        "clf__C": 1
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "lasso",
+      "feature_set": "CASE_COURT_JUDGE",
+      "params": {
+        "clf__C": 1
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "tree",
+      "feature_set": "CASE",
+      "params": {
+        "clf__max_depth": 12,
+        "clf__min_samples_leaf": 200
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "tree",
+      "feature_set": "CASE_COURT",
+      "params": {
+        "clf__max_depth": 12,
+        "clf__min_samples_leaf": 200
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "tree",
+      "feature_set": "CASE_COURT_JUDGE",
+      "params": {
+        "clf__max_depth": 12,
+        "clf__min_samples_leaf": 200
+      },
+      "source": "baseline"
+    },
+    {
+      "model": "rf",
+      "feature_set": "CASE",
+      "params": {
+        "clf__max_depth": null,
+        "clf__min_samples_leaf": 20
+      },
+      "source": "ensemble"
+    },
+    {
+      "model": "rf",
+      "feature_set": "CASE_COURT",
+      "params": {
+        "clf__max_depth": null,
+        "clf__min_samples_leaf": 20
+      },
+      "source": "ensemble"
+    },
+    {
+      "model": "rf",
+      "feature_set": "CASE_COURT_JUDGE",
+      "params": {
+        "clf__max_depth": null,
+        "clf__min_samples_leaf": 20
+      },
+      "source": "ensemble"
+    },
+    {
+      "model": "xgb",
+      "feature_set": "CASE",
+      "params": {
+        "clf__learning_rate": 0.05,
+        "clf__max_depth": 5,
+        "clf__subsample": 0.8
+      },
+      "source": "ensemble"
+    },
+    {
+      "model": "xgb",
+      "feature_set": "CASE_COURT",
+      "params": {
+        "clf__learning_rate": 0.05,
+        "clf__max_depth": 5,
+        "clf__subsample": 0.8
+      },
+      "source": "ensemble"
+    },
+    {
+      "model": "xgb",
+      "feature_set": "CASE_COURT_JUDGE",
+      "params": {
+        "clf__learning_rate": 0.05,
+        "clf__max_depth": 7,
+        "clf__subsample": 0.8
+      },
+      "source": "ensemble"
+    }
+  ]
+}
