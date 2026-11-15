@@ -45,4 +45,6 @@
 
 ## E 复杂模型与解释
 
+- 2026-11-14 · Yanqi Wu · Completed E-02: full-data RF / XGBoost grids; training-fold-only XGBoost early stopping followed by full-fold refits; OOF/validation metrics, stopping diagnostics, reproducible safeguards and review report · `src/models_ensemble.py`, `notebooks/06_models_ensemble.ipynb`, `reports/e02_*`, `reports/figures/e02_auc_comparison.png` · PR #7 (Closes #6)
+
 - 2026-11-08 · Yanqi Wu · Expanded training-only E-01 EDA with an 18-feature inventory, level distributions, feature relationships, year-to-year drift, small-cell suppression, judge permutation checks, and a review report · `notebooks/04_eda.ipynb`, `reports/e01_*.csv`, `reports/e01_eda_report.md`, `reports/figures/e01_*.png` · PR #5
