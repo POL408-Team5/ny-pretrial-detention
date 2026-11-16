@@ -1,7 +1,7 @@
 model,feature_set,target,n_train,n_valid,n_raw_features,n_transformed_features,best_cv_auc,best_params,elapsed_seconds
-rf,CASE,y_detain,193196,120457,18,52,0.9407334795369365,"{""clf__max_depth"": null, ""clf__min_samples_leaf"": 20}",787.7930484999997
-rf,CASE_COURT,y_detain,193196,120457,19,57,0.9420032224441826,"{""clf__max_depth"": null, ""clf__min_samples_leaf"": 20}",848.9690888000005
-rf,CASE_COURT_JUDGE,y_detain,193196,120457,20,242,0.9403484247212047,"{""clf__max_depth"": null, ""clf__min_samples_leaf"": 20}",578.2440049000015
-xgb,CASE,y_detain,193196,120457,18,52,0.9431718425339686,"{""clf__learning_rate"": 0.05, ""clf__max_depth"": 5, ""clf__subsample"": 0.8}",284.79307040000276
-xgb,CASE_COURT,y_detain,193196,120457,19,57,0.9452107374489357,"{""clf__learning_rate"": 0.05, ""clf__max_depth"": 5, ""clf__subsample"": 0.8}",335.2877182000011
-xgb,CASE_COURT_JUDGE,y_detain,193196,120457,20,242,0.9491884031225857,"{""clf__learning_rate"": 0.05, ""clf__max_depth"": 7, ""clf__subsample"": 0.8}",1351.3148126000015
+rf,CASE,y_detain,193196,120457,18,52,0.9407444052080173,"{""clf__max_depth"": null, ""clf__min_samples_leaf"": 20}",292.5270140829962
+rf,CASE_COURT,y_detain,193196,120457,19,57,0.9420207480968031,"{""clf__max_depth"": null, ""clf__min_samples_leaf"": 20}",342.43962504097726
+rf,CASE_COURT_JUDGE,y_detain,193196,120457,20,242,0.9403506952135723,"{""clf__max_depth"": null, ""clf__min_samples_leaf"": 20}",227.71851795795374
+xgb,CASE,y_detain,193196,120457,18,52,0.9431272855619689,"{""clf__learning_rate"": 0.05, ""clf__max_depth"": 5, ""clf__subsample"": 0.8}",186.02626749995397
+xgb,CASE_COURT,y_detain,193196,120457,19,57,0.9452463995788134,"{""clf__learning_rate"": 0.05, ""clf__max_depth"": 5, ""clf__subsample"": 0.8}",251.8673977080034
+xgb,CASE_COURT_JUDGE,y_detain,193196,120457,20,242,0.9492482936920007,"{""clf__learning_rate"": 0.05, ""clf__max_depth"": 7, ""clf__subsample"": 0.8}",1046.620576916961

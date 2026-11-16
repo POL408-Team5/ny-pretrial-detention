@@ -2,11 +2,11 @@
 
 Analysis date: 2026-11-15. Validation year: 2023.
 
-**Status:** Shuyi's comparison is complete. The validation-AUC candidate is **xgb / CASE_COURT_JUDGE**, AUC **0.934691**, AP **0.703567**, Brier **0.063020**. This is a recommendation for the group decision, not a claim that the model, thresholds or final-test workflow have already been frozen.
+**Status:** Shuyi's comparison is complete. The validation-AUC candidate is **xgb / CASE_COURT_JUDGE**, AUC **0.934624**, AP **0.703310**, Brier **0.063059**. This is a recommendation for the group decision, not a claim that the model, thresholds or final-test workflow have already been frozen.
 
 ## Inputs and boundaries
 
-- Main source commit: `81c4231df95a91e0c8440fd53171f4e98e2eb96c`. Ensemble predictions: PR #7 commit `51dd03b39aaf6fd5f76aa3d505b809f69f398232`, final training-only early-stopping [Release](https://github.com/POL408-Team5/ny-pretrial-detention/releases/tag/e02-pr7-early-stopping). The PR is a separate review/merge step.
+- Main source commit: `81c4231df95a91e0c8440fd53171f4e98e2eb96c`. Ensemble predictions: PR #7 commit `51dd03b39aaf6fd5f76aa3d505b809f69f398232 (code); predictions re-generated locally by notebook 06`, final training-only early-stopping [Release](https://github.com/POL408-Team5/ny-pretrial-detention/releases/tag/e02-pr7-early-stopping). The PR is a separate review/merge step.
 - The ensemble file and companion manifest match the published Release SHA-256 digests. All twelve ensemble metric rows were independently recomputed against the manifest; main baseline validation metrics were checked against the committed main report.
 - Training years: [2021, 2022]; validation: 2023. Every supplied model-feature pair has the same case IDs, years and labels. Test/apparent-training rows, nondevelopment years, duplicates, missing cases and invalid probabilities are rejected before comparison.
 - Five models x three main feature sets; the two-field charge rule appears once under CASE. Gender supplements are audited for alignment but excluded from all primary comparisons. Race, ethnicity and gender are not added to main predictors.
@@ -26,12 +26,12 @@ Analysis date: 2026-11-15. Validation year: 2023.
 | tree | CASE | 0.922505 | 0.920519 | 0.924301 | 0.655781 | 0.067615 | 0.120376 | -0.007802 | 120457 |
 | tree | CASE_COURT | 0.922019 | 0.920010 | 0.923799 | 0.656373 | 0.067652 | 0.119983 | -0.008195 | 120457 |
 | tree | CASE_COURT_JUDGE | 0.921855 | 0.919843 | 0.923679 | 0.656324 | 0.067652 | 0.119960 | -0.008218 | 120457 |
-| rf | CASE | 0.925356 | 0.923493 | 0.927081 | 0.668618 | 0.066725 | 0.121780 | -0.006399 | 120457 |
-| rf | CASE_COURT | 0.925849 | 0.924008 | 0.927583 | 0.673322 | 0.066323 | 0.121396 | -0.006783 | 120457 |
-| rf | CASE_COURT_JUDGE | 0.923518 | 0.921655 | 0.925335 | 0.668059 | 0.067246 | 0.122779 | -0.005399 | 120457 |
-| xgb | CASE | 0.930305 | 0.928495 | 0.931979 | 0.683236 | 0.065062 | 0.118558 | -0.009621 | 120457 |
-| xgb | CASE_COURT | 0.931218 | 0.929413 | 0.932937 | 0.690306 | 0.064426 | 0.117674 | -0.010504 | 120457 |
-| xgb | CASE_COURT_JUDGE | 0.934691 | 0.932983 | 0.936368 | 0.703567 | 0.063020 | 0.119153 | -0.009025 | 120457 |
+| rf | CASE | 0.925338 | 0.923491 | 0.927052 | 0.668503 | 0.066736 | 0.121773 | -0.006405 | 120457 |
+| rf | CASE_COURT | 0.925922 | 0.924075 | 0.927670 | 0.673366 | 0.066312 | 0.121371 | -0.006807 | 120457 |
+| rf | CASE_COURT_JUDGE | 0.923587 | 0.921719 | 0.925401 | 0.667944 | 0.067245 | 0.122755 | -0.005423 | 120457 |
+| xgb | CASE | 0.930331 | 0.928510 | 0.932034 | 0.683544 | 0.065037 | 0.118611 | -0.009568 | 120457 |
+| xgb | CASE_COURT | 0.931244 | 0.929472 | 0.932976 | 0.690430 | 0.064394 | 0.117839 | -0.010340 | 120457 |
+| xgb | CASE_COURT_JUDGE | 0.934624 | 0.932905 | 0.936279 | 0.703310 | 0.063059 | 0.119165 | -0.009014 | 120457 |
 
 AUC is ranking, not accuracy. AP is interpreted alongside positive-label prevalence; lower Brier indicates better probability accuracy. Calibration gap is mean prediction minus observed label prevalence. The rule's CASE label does not mean it uses all CASE inputs. The SVM screening decision is documented in the role handoff; no extra family is trained here.
 
@@ -47,20 +47,20 @@ AUC is ranking, not accuracy. AP is interpreted alongside positive-label prevale
 | all_valid | lasso | CASE_COURT_JUDGE minus CASE_COURT | 0.002934 | 0.002491 | 0.003358 | 0.011750 | -0.001331 | 120457 |
 | all_valid | tree | CASE_COURT minus CASE | -0.000486 | -0.000869 | -0.000073 | 0.000592 | 0.000037 | 120457 |
 | all_valid | tree | CASE_COURT_JUDGE minus CASE_COURT | -0.000164 | -0.000255 | -0.000080 | -0.000049 | -0.000000 | 120457 |
-| all_valid | rf | CASE_COURT minus CASE | 0.000493 | 0.000280 | 0.000735 | 0.004703 | -0.000402 | 120457 |
-| all_valid | rf | CASE_COURT_JUDGE minus CASE_COURT | -0.002331 | -0.002598 | -0.002059 | -0.005263 | 0.000923 | 120457 |
-| all_valid | xgb | CASE_COURT minus CASE | 0.000913 | 0.000596 | 0.001248 | 0.007070 | -0.000636 | 120457 |
-| all_valid | xgb | CASE_COURT_JUDGE minus CASE_COURT | 0.003473 | 0.002950 | 0.003967 | 0.013262 | -0.001406 | 120457 |
+| all_valid | rf | CASE_COURT minus CASE | 0.000584 | 0.000374 | 0.000834 | 0.004863 | -0.000424 | 120457 |
+| all_valid | rf | CASE_COURT_JUDGE minus CASE_COURT | -0.002335 | -0.002600 | -0.002063 | -0.005422 | 0.000933 | 120457 |
+| all_valid | xgb | CASE_COURT minus CASE | 0.000913 | 0.000599 | 0.001252 | 0.006885 | -0.000643 | 120457 |
+| all_valid | xgb | CASE_COURT_JUDGE minus CASE_COURT | 0.003380 | 0.002885 | 0.003867 | 0.012880 | -0.001336 | 120457 |
 | coded_judges | logit | CASE_COURT minus CASE | 0.000347 | 0.000100 | 0.000578 | 0.002866 | -0.000304 | 76680 |
 | coded_judges | logit | CASE_COURT_JUDGE minus CASE_COURT | 0.004549 | 0.003862 | 0.005199 | 0.016774 | -0.002069 | 76680 |
 | coded_judges | lasso | CASE_COURT minus CASE | 0.000370 | 0.000119 | 0.000604 | 0.002679 | -0.000277 | 76680 |
 | coded_judges | lasso | CASE_COURT_JUDGE minus CASE_COURT | 0.004549 | 0.003922 | 0.005199 | 0.016898 | -0.002098 | 76680 |
 | coded_judges | tree | CASE_COURT minus CASE | -0.000681 | -0.001249 | -0.000151 | 0.000304 | 0.000080 | 76680 |
 | coded_judges | tree | CASE_COURT_JUDGE minus CASE_COURT | -0.000148 | -0.000246 | -0.000055 | -0.000046 | -0.000000 | 76680 |
-| coded_judges | rf | CASE_COURT minus CASE | 0.000607 | 0.000303 | 0.000904 | 0.004411 | -0.000458 | 76680 |
-| coded_judges | rf | CASE_COURT_JUDGE minus CASE_COURT | -0.002375 | -0.002740 | -0.002039 | -0.003842 | 0.000948 | 76680 |
-| coded_judges | xgb | CASE_COURT minus CASE | 0.001162 | 0.000731 | 0.001610 | 0.006632 | -0.000668 | 76680 |
-| coded_judges | xgb | CASE_COURT_JUDGE minus CASE_COURT | 0.005128 | 0.004419 | 0.005839 | 0.018468 | -0.002199 | 76680 |
+| coded_judges | rf | CASE_COURT minus CASE | 0.000707 | 0.000395 | 0.001008 | 0.004549 | -0.000484 | 76680 |
+| coded_judges | rf | CASE_COURT_JUDGE minus CASE_COURT | -0.002394 | -0.002757 | -0.002059 | -0.004000 | 0.000963 | 76680 |
+| coded_judges | xgb | CASE_COURT minus CASE | 0.001143 | 0.000720 | 0.001567 | 0.006851 | -0.000712 | 76680 |
+| coded_judges | xgb | CASE_COURT_JUDGE minus CASE_COURT | 0.005006 | 0.004301 | 0.005713 | 0.017955 | -0.002080 | 76680 |
 
 Differences are larger minus smaller feature set on the same cases. Positive AUC/AP and negative Brier differences favor the larger set. Include negative results: the direction of a judge gain is not assumed to be positive for every algorithm. An AUC difference is not the proportion of decisions caused or explained by a judge.
 
@@ -82,12 +82,12 @@ The all-case cohort contains **120,457** cases. The diagnostic subset contains *
 | tree | CASE | 0.917136 | 0.914676 | 0.919374 | 0.661436 | 0.073626 | 76680 |
 | tree | CASE_COURT | 0.916455 | 0.913972 | 0.918720 | 0.661740 | 0.073705 | 76680 |
 | tree | CASE_COURT_JUDGE | 0.916307 | 0.913806 | 0.918597 | 0.661694 | 0.073705 | 76680 |
-| rf | CASE | 0.919791 | 0.917370 | 0.922093 | 0.673651 | 0.072659 | 76680 |
-| rf | CASE_COURT | 0.920398 | 0.917979 | 0.922714 | 0.678063 | 0.072201 | 76680 |
-| rf | CASE_COURT_JUDGE | 0.918023 | 0.915550 | 0.920382 | 0.674221 | 0.073149 | 76680 |
-| xgb | CASE | 0.925441 | 0.923002 | 0.927691 | 0.689078 | 0.070719 | 76680 |
-| xgb | CASE_COURT | 0.926603 | 0.924253 | 0.928877 | 0.695711 | 0.070051 | 76680 |
-| xgb | CASE_COURT_JUDGE | 0.931731 | 0.929553 | 0.933874 | 0.714179 | 0.067852 | 76680 |
+| rf | CASE | 0.919776 | 0.917334 | 0.922073 | 0.673559 | 0.072670 | 76680 |
+| rf | CASE_COURT | 0.920482 | 0.918048 | 0.922797 | 0.678108 | 0.072186 | 76680 |
+| rf | CASE_COURT_JUDGE | 0.918088 | 0.915607 | 0.920463 | 0.674109 | 0.073149 | 76680 |
+| xgb | CASE | 0.925416 | 0.922983 | 0.927666 | 0.688768 | 0.070736 | 76680 |
+| xgb | CASE_COURT | 0.926560 | 0.924216 | 0.928819 | 0.695620 | 0.070024 | 76680 |
+| xgb | CASE_COURT_JUDGE | 0.931566 | 0.929314 | 0.933738 | 0.713575 | 0.067945 | 76680 |
 
 This subset answers a coverage diagnostic. It is not a replacement for the all-case result, a randomized judge comparison or proof of the effect of unfamiliar judges. Its case mix may differ from the whole validation sample.
 
@@ -101,18 +101,18 @@ Quantile-bin mean predictions are compared with observed positive-label proporti
 
 | cohort | model | reference_model | feature_set | delta_roc_auc | ci_low | ci_high | delta_avg_precision | delta_brier |
 |---|---|---|---|---|---|---|---|---|
-| all_valid | xgb | logit | CASE | 0.010016 | 0.009193 | 0.010757 | 0.020771 | -0.002228 |
-| all_valid | xgb | lasso | CASE | 0.009968 | 0.009160 | 0.010723 | 0.020641 | -0.002208 |
-| all_valid | xgb | logit | CASE_COURT | 0.010433 | 0.009576 | 0.011268 | 0.024593 | -0.002600 |
-| all_valid | xgb | lasso | CASE_COURT | 0.010363 | 0.009531 | 0.011204 | 0.024607 | -0.002603 |
-| all_valid | xgb | logit | CASE_COURT_JUDGE | 0.011054 | 0.010190 | 0.011921 | 0.026554 | -0.002768 |
-| all_valid | xgb | lasso | CASE_COURT_JUDGE | 0.010902 | 0.010070 | 0.011761 | 0.026120 | -0.002678 |
-| coded_judges | xgb | logit | CASE | 0.010208 | 0.009203 | 0.011266 | 0.019916 | -0.002331 |
-| coded_judges | xgb | lasso | CASE | 0.010164 | 0.009158 | 0.011213 | 0.019782 | -0.002308 |
-| coded_judges | xgb | logit | CASE_COURT | 0.011024 | 0.009896 | 0.012164 | 0.023683 | -0.002695 |
-| coded_judges | xgb | lasso | CASE_COURT | 0.010956 | 0.009854 | 0.012093 | 0.023736 | -0.002700 |
-| coded_judges | xgb | logit | CASE_COURT_JUDGE | 0.011602 | 0.010465 | 0.012867 | 0.025377 | -0.002824 |
-| coded_judges | xgb | lasso | CASE_COURT_JUDGE | 0.011534 | 0.010414 | 0.012810 | 0.025306 | -0.002800 |
+| all_valid | xgb | logit | CASE | 0.010042 | 0.009210 | 0.010772 | 0.021079 | -0.002253 |
+| all_valid | xgb | lasso | CASE | 0.009994 | 0.009160 | 0.010733 | 0.020949 | -0.002233 |
+| all_valid | xgb | logit | CASE_COURT | 0.010459 | 0.009636 | 0.011283 | 0.024717 | -0.002631 |
+| all_valid | xgb | lasso | CASE_COURT | 0.010389 | 0.009572 | 0.011218 | 0.024732 | -0.002634 |
+| all_valid | xgb | logit | CASE_COURT_JUDGE | 0.010987 | 0.010118 | 0.011827 | 0.026297 | -0.002729 |
+| all_valid | xgb | lasso | CASE_COURT_JUDGE | 0.010835 | 0.009963 | 0.011679 | 0.025862 | -0.002639 |
+| coded_judges | xgb | logit | CASE | 0.010184 | 0.009161 | 0.011234 | 0.019606 | -0.002314 |
+| coded_judges | xgb | lasso | CASE | 0.010140 | 0.009115 | 0.011194 | 0.019473 | -0.002291 |
+| coded_judges | xgb | logit | CASE_COURT | 0.010980 | 0.009876 | 0.012099 | 0.023592 | -0.002721 |
+| coded_judges | xgb | lasso | CASE_COURT | 0.010913 | 0.009814 | 0.012020 | 0.023645 | -0.002726 |
+| coded_judges | xgb | logit | CASE_COURT_JUDGE | 0.011437 | 0.010286 | 0.012736 | 0.024773 | -0.002732 |
+| coded_judges | xgb | lasso | CASE_COURT_JUDGE | 0.011370 | 0.010217 | 0.012698 | 0.024702 | -0.002707 |
 
 These candidate diagnostics are conditional on the fitted models and validation selection. They are not multiple-comparison- or model-selection-adjusted significance claims.
 

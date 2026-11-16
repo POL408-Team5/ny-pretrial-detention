@@ -75,7 +75,7 @@ def comparison_table(pred_df, split="valid") -> pd.DataFrame   # 行：model；�
 | BD-03 evaluate.py + 测试 | 11/8 | done | 11/8 | merged 11/8 |
 | BD-04 冒烟测试 | 11/8 | done | 11/8 | merged 11/8 |
 | BD-05 简单模型 × 三组 | 11/13 | done（11/13 合并） | 2026-11-12 | 本地合并 |
-| BD-06 比较与选模型 | 11/15 | done（比较与建议完成；待全组确认冻结） | 2026-11-15 | 待审核 |
+| BD-06 比较与选模型 | 11/15 | done（11/15 合并；建议 XGBoost，待全组确认冻结） | 2026-11-15 | 本地合并 |
 | BD-07 测试 | 11/16 | todo | | |
 | BD-08 Q3 | 视进度 | todo | | |
 | BD-09 deck 页 | 11/19 | todo | | |

@@ -14,7 +14,7 @@ echo "== 3/3 Notebooks (executed in place, numeric order)"
 for nb in notebooks/[0-9][0-9]_*.ipynb; do
   echo "   $nb"
   python -m jupyter nbconvert --to notebook --execute --inplace \
-         --ExecutePreprocessor.timeout=3600 \
+         --ExecutePreprocessor.timeout=14400 \
          --ExecutePreprocessor.kernel_name=python3 "$nb"
 done
 echo "All steps finished."

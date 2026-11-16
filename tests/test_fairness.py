@@ -90,3 +90,80 @@ def test_coverage_denominator_before_small_cell_suppression(monkeypatch):
     assert row["n"] == 2
     assert row["n_total"] == 4
     assert row["case_share"] == pytest.approx(.5)
+
+
+# ---------------------------------------------------------------------------
+# C-02 checks (hand-calculated)
+# ---------------------------------------------------------------------------
+import numpy as np
+
+from src.fairness import choose_threshold, group_metrics, predict_label, residuals
+
+
+def _preds(y, p, ids=None, model="logit", fs="CASE"):
+    ids = ids or [f"c{i}" for i in range(len(y))]
+    return pd.DataFrame({
+        config.ID_COL: ids, config.YEAR_COL: config.VALID_YEAR, "model": model,
+        "feature_set": fs, "target": config.TARGET_Q1, "split": "valid",
+        "y_true": y, "y_prob": p,
+    })
+
+
+def test_threshold_matches_actual_share():
+    # 2 of 5 actual positives -> the two highest scores are predicted 1.
+    y = [1, 0, 1, 0, 0]
+    p = [0.9, 0.8, 0.7, 0.2, 0.1]
+    t = choose_threshold(p, y)
+    assert t == 0.8
+    assert predict_label(p, t).tolist() == [1, 1, 0, 0, 0]
+
+
+def test_threshold_ties_pick_closest_share():
+    # k = 2, but scores 0.8 are tied three times: >=0.8 gives 4 positives (gap 2),
+    # >=0.9 gives 1 (gap 1) -> 0.9 is closer.
+    y = [1, 1, 0, 0, 0]
+    p = [0.9, 0.8, 0.8, 0.8, 0.1]
+    assert choose_threshold(p, y) == 0.9
+    # Exact tie in the gap: prefer the higher threshold. k = 2; >=0.9 -> 1, >=0.8 -> 3.
+    y2 = [1, 1, 0, 0]
+    p2 = [0.9, 0.8, 0.8, 0.1]
+    assert choose_threshold(p2, y2) == 0.9
+
+
+def test_group_metrics_fpr_fnr_by_hand(monkeypatch):
+    monkeypatch.setattr(config, "MIN_GROUP_N", 2)
+    y = [1, 1, 0, 0, 1, 0, 0, 0]
+    p = [0.9, 0.3, 0.6, 0.1, 0.8, 0.7, 0.2, 0.1]
+    pred = _preds(y, p)
+    meta = pd.DataFrame({config.ID_COL: pred[config.ID_COL], "race": ["A"] * 4 + ["B"] * 4})
+    out = group_metrics(pred, meta, "race", threshold=0.5).set_index("group")
+    # A: yhat = 1,0,1,0 -> FP 1 of 2 negatives, FN 1 of 2 positives
+    assert out.loc["A", "fpr"] == 0.5 and out.loc["A", "fnr"] == 0.5
+    # B: y = 1,0,0,0, yhat = 1,1,0,0 -> FP 1/3; only one positive (< MIN_GROUP_N) -> FNR, AUC blank
+    assert out.loc["B", "fpr"] == 1 / 3
+    assert np.isnan(out.loc["B", "fnr"]) and np.isnan(out.loc["B", "roc_auc"])
+    assert out.loc["A", "calibration_gap"] == np.mean([0.9, 0.3, 0.6, 0.1]) - 0.5
+
+
+def test_group_metrics_suppresses_small_groups(monkeypatch):
+    monkeypatch.setattr(config, "MIN_GROUP_N", 3)
+    pred = _preds([1, 0, 1, 0], [0.9, 0.1, 0.8, 0.2])
+    meta = pd.DataFrame({config.ID_COL: pred[config.ID_COL], "race": ["A", "A", "A", None]})
+    out = group_metrics(pred, meta, "race", threshold=0.5)
+    assert out["group"].tolist() == ["A"]          # "Missing" has 1 case -> dropped
+
+
+def test_group_metrics_rejects_mixed_specs():
+    pred = pd.concat([_preds([1, 0], [0.9, 0.1]), _preds([1, 0], [0.8, 0.2], model="xgb")])
+    meta = pd.DataFrame({config.ID_COL: ["c0", "c1"], "race": ["A", "A"]})
+    with pytest.raises(ValueError):
+        group_metrics(pred, meta, "race", threshold=0.5)
+
+
+def test_residual_sign_and_interval(monkeypatch):
+    monkeypatch.setattr(config, "MIN_GROUP_N", 2)
+    pred = _preds([1, 1, 0, 0], [0.5, 0.5, 0.5, 0.5])
+    meta = pd.DataFrame({config.ID_COL: pred[config.ID_COL], "county_name": ["X", "X", "Y", "Y"]})
+    out = residuals(pred, meta, "county_name", n_boot=200, seed=1).set_index("group")
+    assert out.loc["X", "residual"] == 0.5 and out.loc["Y", "residual"] == -0.5
+    assert out.loc["X", "ci_low"] == out.loc["X", "ci_high"] == 0.5   # no variation within group

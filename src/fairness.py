@@ -1,7 +1,7 @@
-"""Role C: training-only court/judge EDA and outcome-free coverage diagnostics.
+"""Role C: court/judge EDA (C-01) and the threshold / group-error audit (C-02).
 
-C-01 helpers only. Prediction metrics and thresholds belong to C-02 and will
-reuse src.evaluate when that upstream module is available.
+C-01: training-only court/judge EDA and outcome-free coverage diagnostics.
+C-02: choose_threshold, predict_label, group_metrics, residuals (reuse src.evaluate).
 """
 from __future__ import annotations
 
@@ -270,3 +270,126 @@ def plot_judge_spread(rates: pd.DataFrame):
     fig.text(.06, .04, f"Each dot = one anonymous judge in ID order; ≥{config.MIN_GROUP_N} cases within severity. Lines: judge P10 / P50 / P90.\nExpected = pooled charge-weight × violent-indicator cell rate; NYC main sample, {years}, NY UCS. No causal interpretation.", fontsize=9, color="#53616A")
     fig.tight_layout(rect=[.02, .12, 1, .93])
     return fig
+
+
+# ---------------------------------------------------------------------------
+# C-02: policy threshold, group error audit and residuals (written by Yiling at
+# merge, 2026-11-15, because C-02 was due before the freeze). Validation year only
+# until the BD-07 test run; the functions themselves do not look at the year.
+# ---------------------------------------------------------------------------
+
+def choose_threshold(y_prob_valid, y_true_valid) -> float:
+    """Policy threshold: predicted share of 1s in 2023 = actual 2023 share of y_detain.
+
+    Rule (frozen 2026-11-15): predict 1 when y_prob >= threshold. With k = round(n * actual
+    share), the threshold is the k-th highest score. If tied scores make an exact k
+    impossible, take whichever of the two neighbouring distinct scores gives a predicted
+    share closer to the actual share (the higher score on an exact tie). Each model and
+    feature set gets its own threshold by this same rule; the numbers are not shared.
+    """
+    from src.evaluate import _inputs
+
+    y, p = _inputs(y_true_valid, y_prob_valid)
+    k = int(round(len(y) * y.mean()))
+    if k == 0:
+        return float(np.nextafter(p.max(), np.inf))   # nothing predicted positive
+    ordered = np.sort(p)[::-1]
+    candidates = np.unique(ordered)[::-1]               # distinct scores, high to low
+    t_k = ordered[k - 1]
+    i = int(np.searchsorted(-candidates, -t_k))        # position of t_k among candidates
+    options = [candidates[i]] + ([candidates[i - 1]] if i > 0 else [])
+    def gap(t):
+        return abs(int((p >= t).sum()) - k)
+    return float(min(options, key=lambda t: (gap(t), -t)))
+
+
+def predict_label(y_prob, threshold: float) -> np.ndarray:
+    """0/1 decision under the frozen rule (>= threshold)."""
+    return (np.asarray(y_prob, dtype=float) >= threshold).astype(int)
+
+
+def _one_spec(pred_df: pd.DataFrame, split: str) -> pd.DataFrame:
+    part = pred_df.loc[pred_df["split"].eq(split)]
+    specs = part[["model", "feature_set", "target"]].drop_duplicates()
+    if len(specs) != 1:
+        raise ValueError("Pass predictions for exactly one model, feature set and target.")
+    if part[config.ID_COL].duplicated().any():
+        raise ValueError("Each case must appear once per split.")
+    return part
+
+
+def _attach(pred_df: pd.DataFrame, df: pd.DataFrame, col: str, split: str) -> pd.DataFrame:
+    part = _one_spec(pred_df, split)
+    meta = df[[config.ID_COL, col]].drop_duplicates(config.ID_COL)
+    out = part.merge(meta, on=config.ID_COL, how="left", validate="one_to_one")
+    if len(out) != len(part):
+        raise ValueError("Case identifiers did not align.")
+    out[col] = out[col].astype("string").fillna("Missing")
+    return out
+
+
+def group_metrics(pred_df, df, group_col, threshold, split="valid") -> pd.DataFrame:
+    """Per-group calibration and errors at a fixed threshold.
+
+    Errors are relative to the historical decision label, not to a "correct" decision.
+    A group is dropped if n < MIN_GROUP_N. FPR (FNR) is blanked when the group has fewer
+    than MIN_GROUP_N actual 0s (1s), and AUC when either class is below that size.
+    """
+    from src.evaluate import metrics
+
+    data = _attach(pred_df, df, group_col, split)
+    rows = []
+    for group, g in data.groupby(group_col, sort=True):
+        y, p = g["y_true"].to_numpy(int), g["y_prob"].to_numpy(float)
+        if len(y) < config.MIN_GROUP_N:
+            continue
+        yhat = predict_label(p, threshold)
+        n_pos, n_neg = int(y.sum()), int((1 - y).sum())
+        fp, fn = int(((yhat == 1) & (y == 0)).sum()), int(((yhat == 0) & (y == 1)).sum())
+        enough_pos, enough_neg = n_pos >= config.MIN_GROUP_N, n_neg >= config.MIN_GROUP_N
+        m = metrics(y, p)
+        rows.append({
+            "group_col": group_col, "group": group, "n": len(y), "n_pos": n_pos, "n_neg": n_neg,
+            "base_rate": float(y.mean()), "mean_pred": float(p.mean()),
+            "calibration_gap": float(p.mean() - y.mean()),
+            "roc_auc": m["roc_auc"] if enough_pos and enough_neg else np.nan,
+            "pred_pos_rate": float(yhat.mean()),
+            "fpr": fp / n_neg if enough_neg else np.nan,
+            "fnr": fn / n_pos if enough_pos else np.nan,
+        })
+    out = pd.DataFrame(rows)
+    if not out.empty:
+        spec = _one_spec(pred_df, split).iloc[0]
+        out.insert(0, "feature_set", spec["feature_set"])
+        out.insert(0, "model", spec["model"])
+        out["threshold"] = threshold
+    return out
+
+
+def residuals(pred_df, df, by, split="valid", n_boot=None, seed=None) -> pd.DataFrame:
+    """Observed rate minus mean prediction by county or judge code, with a bootstrap interval.
+
+    Cases are resampled within each group (percentile interval). A positive residual means
+    more bail/remand than the model predicts for those cases. This is a prediction residual,
+    not a causal judge effect. Groups with n < MIN_GROUP_N are dropped.
+    """
+    n_boot = config.N_BOOTSTRAP if n_boot is None else n_boot
+    rng = np.random.default_rng(config.RANDOM_STATE if seed is None else seed)
+    data = _attach(pred_df, df, by, split)
+    rows = []
+    for group, g in data.groupby(by, sort=True):
+        if len(g) < config.MIN_GROUP_N:
+            continue
+        diff = g["y_true"].to_numpy(float) - g["y_prob"].to_numpy(float)
+        boot = np.concatenate([diff[rng.integers(0, len(diff), size=(b, len(diff)))].mean(axis=1)
+                               for b in np.diff(np.r_[0:n_boot:50, n_boot])])   # 50 draws at a time
+        rows.append({"by": by, "group": group, "n": len(g),
+                     "observed_rate": float(g["y_true"].mean()), "mean_pred": float(g["y_prob"].mean()),
+                     "residual": float(diff.mean()),
+                     "ci_low": float(np.quantile(boot, 0.025)), "ci_high": float(np.quantile(boot, 0.975))})
+    out = pd.DataFrame(rows)
+    if not out.empty:
+        spec = _one_spec(pred_df, split).iloc[0]
+        out.insert(0, "feature_set", spec["feature_set"])
+        out.insert(0, "model", spec["model"])
+    return out

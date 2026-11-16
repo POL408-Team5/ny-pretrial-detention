@@ -20,6 +20,8 @@
 5. 产出 1–2 张可放进 deck 的图（如法官羁押率的毛毛虫图，按 `judge_id`），与 Yanqi 商量谁的图做 EDA 发现页
 
 ### C-02 `src/fairness.py`（11/15 周日前）
+
+> 11/15：Yiling 已代做并合并，见 `src/fairness.py` 末尾和 `notebooks/08_fairness.ipynb`。阈值规则已写死：`y_prob >= t`；`t` 取第 k 高分（k = 2023 年实际比例 × n，四舍五入），并列时取使预测比例更接近实际比例的相邻分数；每个模型 × 特征组各定一个阈值。FPR / FNR 在该组实际 0 / 1 少于 `MIN_GROUP_N` 时留空。Yixuan 接手：测试集上的 C-03（同一阈值，不重新定）和 C-04 法官残差。
 ```python
 def choose_threshold(y_prob_valid, y_true_valid) -> float
     # 默认规则：使 2023 年预测为 1 的比例 = 2023 年实际 y_detain 比例 [定]
@@ -45,7 +47,7 @@ def residuals(pred_df, df, by: str) -> pd.DataFrame
 | 任务 | 截止 | 状态 | 日期 | PR |
 |---|---|---|---|---|
 | C-01 notebook 03 | 11/8 | done (future outcome comparisons deferred) | 2026-11-08 | [#3](https://github.com/POL408-Team5/ny-pretrial-detention/pull/3) |
-| C-02 fairness.py + 测试 | 11/15 | todo | | |
-| C-03 公平性分析 | 11/18 | todo | | |
+| C-02 fairness.py + 测试 | 11/15 | done（Yiling 代做，11/15 合并：`choose_threshold`、`predict_label`、`group_metrics`、`residuals` + 6 个测试） | 2026-11-15 | 本地合并 |
+| C-03 公平性分析 | 11/18 | 验证集部分已做（notebook 08，Yiling）；测试集部分待 11/16 后由 Yixuan 接 | 2026-11-15 | |
 | C-04 残差 | 11/18 | todo | | |
 | C-05 deck 页 | 11/19 | todo | | |

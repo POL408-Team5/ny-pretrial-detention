@@ -35,3 +35,20 @@ Each version switches off one main-sample rule and rebuilds everything downstrea
 - Deck wording: "Our results do not depend on de-duplication. Counting $1 bail as detention lowers AUC because such bail is hard to predict, but the ranking of feature sets and the judge increment are unchanged."
 
 These are validation-year checks with logit. After the freeze, BD-07 can rerun `python -m src.sensitivity --model <final>` if the final model is another baseline. RF/XGBoost would need the ensemble estimators passed in.
+
+## D14: record fields with an undocumented reference date (added 2026-11-15)
+
+`python -m src.sensitivity --d14` refits on the main sample without the six DCJS counts whose reference date is not documented (`prior_vfo_cnt`, `prior_nonvfo_cnt`, `prior_misd_cnt`, `pend_vfo`, `pend_nonvfo`, `pend_misd`). `supervision` (documented "at the time of arraignment"), `dcjs_missing` and `dat_wo_ws_prior_to_arraign` are kept. Logit uses its full grid. XGBoost uses the hyperparameters E-02 selected for each set, with the same training-only early stopping. Scored on 2023 only; results in `a106_d14_valid.csv`.
+
+| Model | Fields | CASE | CASE_COURT | CASE_COURT_JUDGE | +county | +judge |
+|---|---|---|---|---|---|---|
+| logit | kept | 0.9203 | 0.9208 | 0.9236 | +0.0005 | +0.0029 |
+| logit | dropped | 0.8866 | 0.8878 | 0.8916 | +0.0012 | +0.0038 |
+| XGBoost | kept | 0.9303 | 0.9312 | 0.9346 | +0.0009 | +0.0034 |
+| XGBoost | dropped | 0.8946 | 0.8965 | 0.8996 | +0.0019 | +0.0031 |
+
+(XGBoost "kept" reproduces E-02 to within 0.0001; the small difference is from a different machine.)
+
+- **The record counts carry a lot of signal.** Dropping them lowers AUC by about 0.034–0.035 in every set, for both models. If these counts include anything recorded after arraignment, this is the most the headline AUC could be inflated by from that source.
+- **The conclusions do not change.** Without them, XGBoost is still best, the order of the feature sets is the same, and county and judge add a similar amount: +0.003 to +0.004 from the judge.
+- Deck wording: "Six criminal-record counts have an undocumented reference date. Without them, AUC falls from 0.93 to 0.90, but the model ranking and the court and judge increments are unchanged."
