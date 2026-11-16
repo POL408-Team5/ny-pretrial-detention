@@ -21,7 +21,7 @@
 
 ### C-02 `src/fairness.py`（11/15 周日前）
 
-> 11/15：Yiling 已代做并合并，见 `src/fairness.py` 末尾和 `notebooks/08_fairness.ipynb`。阈值规则已写死：`y_prob >= t`；`t` 取第 k 高分（k = 2023 年实际比例 × n，四舍五入），并列时取使预测比例更接近实际比例的相邻分数；每个模型 × 特征组各定一个阈值。FPR / FNR 在该组实际 0 / 1 少于 `MIN_GROUP_N` 时留空。Yixuan 接手：测试集上的 C-03（同一阈值，不重新定）和 C-04 法官残差。
+> 11/15：Yiling 已代做并合并，见 `src/fairness.py` 末尾和 `notebooks/08_fairness.ipynb`。阈值规则已写死：`y_prob >= t`；`t` 取第 k 高分（k = 2023 年实际比例 × n，四舍五入），并列时取使预测比例更接近实际比例的相邻分数；每个模型 × 特征组各定一个阈值。FPR / FNR 在该组实际 0 / 1 少于 `MIN_GROUP_N` 时留空。测试集上的 C-03、C-04 也已由 Yiling 做完（notebook 10），Yixuan 负责呈现。
 ```python
 def choose_threshold(y_prob_valid, y_true_valid) -> float
     # 默认规则：使 2023 年预测为 1 的比例 = 2023 年实际 y_detain 比例 [定]
@@ -37,6 +37,12 @@ def residuals(pred_df, df, by: str) -> pd.DataFrame
 `notebooks/08_fairness.ipynb`：按 `race`、`ethnicity`、`gender`、`age_group` 的 `group_metrics`；分组校准图；`CASE` 与 `CASE_COURT_JUDGE` 两个模型都做，看加入法官后组间差距是否变化。测试集结果要等 Shuyi 11/16 跑完。
 
 ### C-04 残差（11/16–18）
+
+> **11/15 调整**：分析部分改由 Yiling 完成，你负责审核和 deck 上的呈现，见本节末尾“你现在要做的”。
+已完成：`notebooks/10_test_fairness.ipynb`（测试年按种族、族裔、性别、年龄的误差与校准，加入法官前后的变化，县残差和匿名法官残差及汇总；阈值来自冻结记录，不重新定）。
+
+**你现在要做的**：用 `reports/c03_test_*`、`c04_test_*` 做公平性两页：选哪些组和指标上 deck、怎么写“相对于历史决定的误差”、法官残差只报分布不报单个法官。11/19 交 Yanqi。
+
 县和法官的残差图（`CASE` 组最终模型）：哪些法官比“同样案件的平均预测”系统性偏高或偏低，附区间；只显示 `judge_id`。
 
 ### C-05 deck（11/19）
@@ -48,6 +54,6 @@ def residuals(pred_df, df, by: str) -> pd.DataFrame
 |---|---|---|---|---|
 | C-01 notebook 03 | 11/8 | done (future outcome comparisons deferred) | 2026-11-08 | [#3](https://github.com/POL408-Team5/ny-pretrial-detention/pull/3) |
 | C-02 fairness.py + 测试 | 11/15 | done（Yiling 代做，11/15 合并：`choose_threshold`、`predict_label`、`group_metrics`、`residuals` + 6 个测试） | 2026-11-15 | 本地合并 |
-| C-03 公平性分析 | 11/18 | 验证集部分已做（notebook 08，Yiling）；测试集部分待 11/16 后由 Yixuan 接 | 2026-11-15 | |
-| C-04 残差 | 11/18 | todo | | |
+| C-03 公平性分析 | 11/18 | 分析完成（Yiling，notebook 08 验证集、notebook 10 测试集）；Yixuan 负责呈现 | 2026-11-15 | |
+| C-04 残差 | 11/18 | 分析完成（Yiling，notebook 10）；Yixuan 负责呈现 | | |
 | C-05 deck 页 | 11/19 | todo | | |

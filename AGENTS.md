@@ -213,5 +213,6 @@ def shap_summary(feature_set, model_name, df) -> ...
 - **11/13 已合并**：BD-05（Shuyi：logit、LASSO、决策树 × 三组特征及性别补充组，`reports/bd05_*`）。验证集 AUC 0.920–0.924，规则基准 0.847。notebook 05 现在重训 12 个模型，`run_all.sh` 全程约 45 分钟。
 - **11/13 A1**：敏感性检查完成（`reports/a106_sensitivity_report.md`，结论不变）；法律背景与文献核实（`docs/背景与文献核实.md`）。
 - **11/15 已合并**：E-02（Yanqi，PR #7：RF、XGBoost，训练年内早停）；BD-06（Shuyi：五模型比较、增量、校准，建议 XGBoost）；C-02 与 C-03 验证集部分（Yiling 代做：`fairness.py` 阈值与分组误差、notebook 08）；D14 敏感性（结论不变）。notebook 06 重训约 70 分钟，`run_all.sh` 全程约 2 小时（单个 notebook 上限改为 4 小时）。冻结草案见 `docs/冻结记录_2026-11-16.md`。
-- 下一步：11/16 全组确认冻结 → Shuyi 跑 BD-07（2024，一次）；11/16–18 测试集分析（Yanqi E-03、Yixuan C-03/C-04）；11/19 deck 各页交 Yanqi；11/22 提交。
+- **11/15 晚**：BD-07 测试代码（`src/final_test.py`，dry run 已复现验证集结果）、E-03（`src/explain.py`、notebook 09）、测试年 C-03/C-04（notebook 10）由 Yiling 完成；组员改为负责审核和 deck 呈现（见各交接文件）。`run_all.sh` 改为 5 步：01–08 → BD-07 dry run（测试跑过后改用测试结果，测试本身不在脚本里）→ 09–10。
+- 下一步：11/16 全组确认冻结 → Yiling 跑一次 2024 测试，再跑 notebook 09–10；11/19 deck 各页交 Yanqi；11/22 提交。
 - 其他角色现在可以做：用假数据先写好自己的函数（接口见 3.3、3.5）。

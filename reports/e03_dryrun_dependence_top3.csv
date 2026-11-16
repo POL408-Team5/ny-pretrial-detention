@@ -1,0 +1,23 @@
+value,mean,size,feature
+J085,-2.597332,103,judge_id
+J025,-2.587561,108,judge_id
+other,-2.5664968,288,judge_id
+unseen,-2.5476406,1515,judge_id
+J003,-2.5342546,160,judge_id
+J011,-2.5328498,156,judge_id
+J006,-2.5289507,117,judge_id
+J010,-2.5190861,115,judge_id
+Robbery,2.356167,255,arraign_charge_category
+Criminal Possession of a Weapon,2.3743873,237,arraign_charge_category
+Unlicensed Operation,2.4474928,235,arraign_charge_category
+Burglary,2.4588273,172,arraign_charge_category
+Property,2.478572,392,arraign_charge_category
+Other,2.4856632,178,arraign_charge_category
+Larceny,2.4913144,494,arraign_charge_category
+Drug,2.4940715,357,arraign_charge_category
+Assault,2.517709,1874,arraign_charge_category
+Aggravated Harassment,2.528104,112,arraign_charge_category
+Criminal Contempt,2.5437355,249,arraign_charge_category
+DWI,2.5838728,126,arraign_charge_category
+Felony,0.8619861,1641,top_severity_at_arraign
+Misdemeanor,0.8708344,3359,top_severity_at_arraign

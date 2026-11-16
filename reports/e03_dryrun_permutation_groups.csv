@@ -1,0 +1,11 @@
+model,feature_set,item,columns,auc_drop_mean,auc_drop_sd,base_auc,n_repeats
+xgb,CASE_COURT_JUDGE,charge,"top_severity_at_arraign, top_charge_weight_at_arraign, top_charge_at_arraign_violent_felony_ind, top_arraign_attempt_indicator, arraign_charge_category, hate_crime_ind",0.2845759100759458,0.0019396693563336427,0.9346238202810588,5
+xgb,CASE_COURT_JUDGE,record_counts (D14),"prior_vfo_cnt, prior_nonvfo_cnt, prior_misd_cnt, pend_vfo, pend_nonvfo, pend_misd",0.08409602743320951,0.001491207224261047,0.9346238202810588,5
+xgb,CASE_COURT_JUDGE,supervision_and_process,"supervision, dcjs_missing, dat_wo_ws_prior_to_arraign, arrest_type, case_type",0.01563584073804778,0.0005758704327945655,0.9346238202810588,5
+xgb,CASE_COURT_JUDGE,judge,judge_id,0.006854066521477531,0.0001731591716658689,0.9346238202810588,5
+xgb,CASE_COURT_JUDGE,county,county_name,0.002505097311903226,0.00016046583716853379,0.9346238202810588,5
+xgb,CASE_COURT_JUDGE,age,age_at_arrest,0.0024290600914798955,0.00014564130997245367,0.9346238202810588,5
+xgb,CASE,charge,"top_severity_at_arraign, top_charge_weight_at_arraign, top_charge_at_arraign_violent_felony_ind, top_arraign_attempt_indicator, arraign_charge_category, hate_crime_ind",0.2899746900094783,0.001853562350557146,0.9303309158285302,5
+xgb,CASE,record_counts (D14),"prior_vfo_cnt, prior_nonvfo_cnt, prior_misd_cnt, pend_vfo, pend_nonvfo, pend_misd",0.08422875156506848,0.0013418131218479858,0.9303309158285302,5
+xgb,CASE,supervision_and_process,"supervision, dcjs_missing, dat_wo_ws_prior_to_arraign, arrest_type, case_type",0.01477038932162027,0.0005394194280892201,0.9303309158285302,5
+xgb,CASE,age,age_at_arrest,0.002321306688514846,8.269919860924881e-05,0.9303309158285302,5

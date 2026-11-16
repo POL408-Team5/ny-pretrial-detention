@@ -1,0 +1,78 @@
+{
+  "frozen_at_utc": "2026-11-16T03:17:34+00:00",
+  "code_commit": "e37cb052e49f2ef2b18b4dc86b2cad31672e85fb",
+  "refit_years": [
+    2021,
+    2022,
+    2023
+  ],
+  "test_year": 2024,
+  "judge_column_for_test": "judge_id_final",
+  "xgb_tree_count": "early-stopping rule inside each fit (TrainOnlyEarlyStoppingXGBClassifier, ceiling 2000, patience 50)",
+  "recalibration": "none",
+  "threshold_rule": "predict 1 if y_prob >= threshold",
+  "threshold_mode": "carry_over",
+  "threshold_mode_meaning": "use threshold_2023 unchanged on the refitted model's 2024 scores",
+  "specs": [
+    {
+      "model": "xgb",
+      "feature_set": "CASE",
+      "params": {
+        "clf__learning_rate": 0.05,
+        "clf__max_depth": 5,
+        "clf__subsample": 0.8
+      },
+      "threshold_2023": 0.3520140051841736,
+      "actual_share_2023": 0.1281785201358161
+    },
+    {
+      "model": "xgb",
+      "feature_set": "CASE_COURT",
+      "params": {
+        "clf__learning_rate": 0.05,
+        "clf__max_depth": 5,
+        "clf__subsample": 0.8
+      },
+      "threshold_2023": 0.34157177805900574,
+      "actual_share_2023": 0.1281785201358161
+    },
+    {
+      "model": "xgb",
+      "feature_set": "CASE_COURT_JUDGE",
+      "params": {
+        "clf__learning_rate": 0.05,
+        "clf__max_depth": 7,
+        "clf__subsample": 0.8
+      },
+      "threshold_2023": 0.35102444887161255,
+      "actual_share_2023": 0.1281785201358161
+    },
+    {
+      "model": "logit",
+      "feature_set": "CASE",
+      "params": {
+        "clf__C": 1
+      },
+      "threshold_2023": 0.34142401887738727,
+      "actual_share_2023": 0.1281785201358161
+    },
+    {
+      "model": "logit",
+      "feature_set": "CASE_COURT",
+      "params": {
+        "clf__C": 10
+      },
+      "threshold_2023": 0.3406397092290831,
+      "actual_share_2023": 0.1281785201358161
+    },
+    {
+      "model": "logit",
+      "feature_set": "CASE_COURT_JUDGE",
+      "params": {
+        "clf__C": 1
+      },
+      "threshold_2023": 0.343132348611919,
+      "actual_share_2023": 0.1281785201358161
+    }
+  ]
+}

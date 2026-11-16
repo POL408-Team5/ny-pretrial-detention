@@ -18,6 +18,7 @@
 
 ## A 数据与特征（Yiling Long、Xinhui Zong）
 
+- 2026-11-15 · Yiling Long · BD-07 最终测试代码 `src/final_test.py`（冻结 → dry run → 一次性测试，带锁；dry run 复现验证集 AUC）；E-03 `src/explain.py` + notebook 09；测试年公平性 notebook 10；notebook 08 补 logit CASE_COURT 阈值；`run_all.sh` 改为 5 步；新增 5 个测试（共 65）；交接改为组员负责审核与呈现 · `src/`、`notebooks/08–10`、`scripts/`、`tests/`、`docs/` · 本地合并
 - 2026-11-15 · Yiling Long · 合并 E-02（PR #7）和 BD-06；notebook 07 增加“本地重跑”模式（notebook 06 重跑后 XGBoost 预测不逐字节相同，改为核对本次 `e02_metrics.csv`）；`run_all.sh` 单个 notebook 上限 1 → 4 小时；代做 C-02（`fairness.py`：`choose_threshold`、`predict_label`、`group_metrics`、`residuals`，6 个测试）和 C-03 验证集部分（notebook 08）；D14 敏感性（`sensitivity.py --d14`）；冻结记录草案。Yiling 本地全量重跑：E-02 验证集 AUC 与 Yanqi 的发布结果最大相差 0.00007，BD-06 结论不变；仓库里的 `e02_*`、`bd06_*` 结果现在是本地重跑版本 · `src/`、`tests/`、`notebooks/07–08`、`scripts/`、`reports/a106_*`、`reports/c0*`、`docs/` · 本地合并
 - 2026-11-13 · Yiling Long · [接口] A1-06：`build_sample` 加两个开关参数（默认取 config，主样本不变）；`config.SENSITIVITY_VARIANTS`；`build_dataset --sensitivity`；新增 `src/sensitivity.py` 和验证集结果；A1-07 法律背景与文献核实 · `src/`、`reports/a106_*`、`reports/sample_flow_*`、`docs/背景与文献核实.md`、`README.md` · 本地合并
 - 2026-11-13 · Yiling Long · 合并 BD-05；建模截止后移（E-02 11/14，BD-06、C-02 11/15，冻结 11/16）；交接文件补课件 Week 6 要点（XGBoost 早停用训练年切片、permutation importance 用测试集、测试报告政策阈值下的混淆矩阵）和不加 SVM 的说明 · `docs/`、`AGENTS.md` · 本地合并

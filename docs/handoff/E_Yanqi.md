@@ -30,6 +30,12 @@ ENSEMBLE_MODELS = {
 `notebooks/06_models_ensemble.ipynb`：两个模型 × 三组特征调用 `fit_and_predict(..., scale=False)`，输出 `data/processed/predictions_ensemble.parquet`（列与 baseline 完全相同）。太慢时先在子样本上调参并写明。XGBoost 用 early stopping 定树的数量时，早停用的验证片**从训练年（2021–22）里切**，不能用 2023 验证集（课件 Week 6）。
 
 ### E-03 SHAP 与 permutation importance（11/16–18）
+
+> **11/15 调整**：分析部分改由 Yiling 完成，你负责审核和 deck 上的呈现，见本节末尾“你现在要做的”。
+已完成：`src/explain.py`、`notebooks/09_shap.ipynb`（SHAP 按原始特征汇总、前三特征依赖、单特征和预先分组的 permutation、gain 排名对比；测试后自动改用 2024）。加性别的 XGBoost SHAP 已取消（见冻结记录）。
+
+**你现在要做的**：从 `reports/e03_test_*` 选图，写“模型最依赖什么”一页，并解释为什么 SHAP、permutation、gain 的排名不同（dry run 里法官的 SHAP 排第 2，permutation 只排第 9）。然后做 E-04 deck 整合。
+
 `src/explain.py`：
 ```python
 def shap_summary(feature_set, model_name, df, n_sample=5000) -> pd.DataFrame
@@ -53,6 +59,6 @@ def permutation_importance_table(feature_set, model_name, df) -> pd.DataFrame
 |---|---|---|---|---|
 | E-01 EDA 与发现页 | 11/8 | done（11/9 合并） | 2026-11-08 | #5 |
 | E-02 RF / XGBoost × 三组 | 11/14 | done（11/15 合并） | 2026-11-14 | #7 |
-| E-03 SHAP 与 permutation | 11/18 | todo | | |
+| E-03 SHAP 与 permutation | 11/18 | 分析完成（Yiling，notebook 09）；Yanqi 负责呈现 | | |
 | E-04 deck 整合 | 11/21 | todo | | |
 | E-05 聚类 | 视进度 | todo | | |

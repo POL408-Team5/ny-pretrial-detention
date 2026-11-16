@@ -58,12 +58,20 @@ def comparison_table(pred_df, split="valid") -> pd.DataFrame   # 行：model；�
 不加 SVM：线性 SVM 在 `CASE` 上验证集 AUC 0.918 / AP 0.658，logit 为 0.920 / 0.663，没有更好，而且不直接给概率（阈值和校准都要用概率）。deck 里一句话说明即可。
 
 ### BD-07 冻结后测试（11/16，只跑一次）
+
+> **11/15 调整**：分析部分改由 Yiling 完成，你负责审核和 deck 上的呈现，见本节末尾“你现在要做的”。
+代码：`src/final_test.py`（`--freeze` → `--dry-run` → `--run --confirm-freeze`）。dry run（2021–22 拟合、2023 打分）已复现验证集结果（logit 完全一致，XGBoost 差 < 0.0001）。输出 `reports/bd07_test_*.csv`：指标与 AUC 区间、增量（全部 / 已编码法官）、XGBoost 减 logit、政策阈值下的混淆矩阵、校准、法官编码覆盖。
+
+**你现在要做的**：11/16 跑测试之前看一遍 `src/final_test.py`（重点：重拟合用 2021–23 和 `judge_id_final`、阈值套用方式、只跑一次的锁），有问题在群里说。
+
 `run_test=True` 跑选定模型 × 三组特征（重新拟合用 2021–2023，`CASE_COURT_JUDGE` 组用 `config.JUDGE_COL_FINAL` 代替 `judge_id`）；测试集比较表（AUC、AP、Brier）、信息增益图（附区间）、校准图，以及**政策阈值（C-02 在 2023 年定的阈值）下的混淆矩阵**（课件 Week 6 的测试步骤），存 `reports/`。措辞按“预测”写，不写成因果效应。跑完在群里通知，之后不再改模型。
 
 ### BD-08 Q3（11/23 之后，视进度）
 在 `released == 1` 的人中预测 `y_warrant`；注意观察窗口到处置为止长短不一、未结案件。开工前先和 Yiling 定样本。
 
 ### BD-09 deck（11/16–19）
+
+**11/15 起这是你的主任务**：用 `reports/bd07_test_*.csv` 做方法与结果页：划分与验证设计、五模型验证集比较（BD-06）、测试集结果表、信息增益图（附区间）、校准图、混淆矩阵；写清 OOF 不是嵌套 CV、AUC 不是准确率。11/19 交 Yanqi。
 划分与验证设计、模型比较表、信息增益图、校准图；准备回答“给决策者看 impurity 还是 permutation importance、为什么”。
 
 ## 状态（只由 Shuyi 更新）
@@ -76,6 +84,6 @@ def comparison_table(pred_df, split="valid") -> pd.DataFrame   # 行：model；�
 | BD-04 冒烟测试 | 11/8 | done | 11/8 | merged 11/8 |
 | BD-05 简单模型 × 三组 | 11/13 | done（11/13 合并） | 2026-11-12 | 本地合并 |
 | BD-06 比较与选模型 | 11/15 | done（11/15 合并；建议 XGBoost，待全组确认冻结） | 2026-11-15 | 本地合并 |
-| BD-07 测试 | 11/16 | todo | | |
+| BD-07 测试 | 11/16 | 代码与 dry run 完成（Yiling）；冻结确认后由 Yiling 跑一次 | | |
 | BD-08 Q3 | 视进度 | todo | | |
 | BD-09 deck 页 | 11/19 | todo | | |
