@@ -1,0 +1,7 @@
+model,feature_set,selected_n_estimators
+xgb,CASE,574.0
+xgb,CASE_COURT,854.0
+xgb,CASE_COURT_JUDGE,1018.0
+logit,CASE,
+logit,CASE_COURT,
+logit,CASE_COURT_JUDGE,

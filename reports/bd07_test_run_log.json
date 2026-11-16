@@ -1,0 +1,18 @@
+{
+  "started_utc": "2026-11-16T03:29:47+00:00",
+  "finished_utc": "2026-11-16T03:31:29+00:00",
+  "status": "finished",
+  "code_commit": "759a40ea66b0aff34c783326a034e82d4c6eff24",
+  "frozen_spec_sha256": "505a23f2b8b8f444db9f055e3aa0ce432b289477484a3acfe559593139118ead",
+  "n_refit": 313653,
+  "n_test": 135821,
+  "predictions": "data/processed/predictions_test.parquet",
+  "predictions_sha256": "f24c7967b115b85138a2892a18dfe8e95e81b3fc11da659f89cc91fabda5c03f",
+  "python": "3.11.18",
+  "packages": {
+    "pandas": "3.1.1",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.2.0"
+  }
+}

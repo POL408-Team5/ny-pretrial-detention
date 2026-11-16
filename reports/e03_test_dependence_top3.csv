@@ -1,0 +1,26 @@
+value,mean,size,feature
+Robbery,3.1939926,217,arraign_charge_category
+Burglary,3.2369509,186,arraign_charge_category
+Criminal Possession of a Weapon,3.2457514,220,arraign_charge_category
+Larceny,3.2658246,485,arraign_charge_category
+Drug,3.2689764,385,arraign_charge_category
+Property,3.2781553,464,arraign_charge_category
+Other,3.2930617,184,arraign_charge_category
+Unlicensed Operation,3.3140304,237,arraign_charge_category
+Assault,3.3173544,1855,arraign_charge_category
+Criminal Contempt,3.320131,256,arraign_charge_category
+DWI,3.349831,104,arraign_charge_category
+J049,-1.4537723,139,judge_id
+J035,-1.4302069,104,judge_id
+unseen,-1.4045621,1436,judge_id
+J043,-1.3882862,115,judge_id
+J012,-1.3816589,119,judge_id
+J003,-1.3794411,117,judge_id
+J004,-1.3765379,104,judge_id
+J014,-1.3605433,154,judge_id
+CF,0.7086475,326,top_charge_weight_at_arraign
+UM,0.7164531,343,top_charge_weight_at_arraign
+AM,0.7413925,2995,top_charge_weight_at_arraign
+BF,0.7623115,299,top_charge_weight_at_arraign
+EF,0.76316893,308,top_charge_weight_at_arraign
+DF,0.76437217,610,top_charge_weight_at_arraign
