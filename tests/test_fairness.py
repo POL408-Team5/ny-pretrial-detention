@@ -167,3 +167,32 @@ def test_residual_sign_and_interval(monkeypatch):
     out = residuals(pred, meta, "county_name", n_boot=200, seed=1).set_index("group")
     assert out.loc["X", "residual"] == 0.5 and out.loc["Y", "residual"] == -0.5
     assert out.loc["X", "ci_low"] == out.loc["X", "ci_high"] == 0.5   # no variation within group
+
+
+# --- C-05 (2026-11-19): one number checked by hand, as the Week 8 notebook asks ---
+
+def test_disparity_rates_by_hand(monkeypatch):
+    from src.fairness import disparity_rates, rate_comparison
+    monkeypatch.setattr(config, "MIN_GROUP_N", 2)
+    pred = _preds([1, 0, 1, 0, 1, 0, 0, 0], [0.9, 0.6, 0.3, 0.1, 0.8, 0.7, 0.2, 0.1])
+    meta = pd.DataFrame({config.ID_COL: pred[config.ID_COL], "race": list("AAAABBBB")})
+    out = disparity_rates(pred, meta, "race", threshold=0.5).set_index("group")
+    # A: y 1,0,1,0 / yhat 1,1,0,0 -> TP 1 FP 1 FN 1 TN 1
+    assert (out.loc["A", ["TP", "FP", "FN", "TN"]] == [1, 1, 1, 1]).all()
+    assert out.loc["A", "flag_rate"] == 0.5 and out.loc["A", "fpr"] == 0.5 and out.loc["A", "precision"] == 0.5
+    # B: y 1,0,0,0 / yhat 1,1,0,0 -> TP 1 FP 1 FN 0 TN 2 -> FPR 1/3; TPR blank (1 positive < MIN_GROUP_N)
+    assert out.loc["B", "fpr"] == pytest.approx(1 / 3) and np.isnan(out.loc["B", "tpr"])
+    cmp = rate_comparison(out.reset_index(), "A", "B").set_index("rate")
+    assert cmp.loc["fpr", "gap"] == pytest.approx(0.5 - 1 / 3)
+    assert cmp.loc["fpr", "ratio"] == pytest.approx((1 / 3) / 0.5)
+    assert cmp.loc["flag_rate", "four_fifths"] == True   # both 0.5 -> ratio 1
+
+
+def test_equalizing_threshold_reaches_target(monkeypatch):
+    from src.fairness import equalizing_threshold, disparity_rates
+    monkeypatch.setattr(config, "MIN_GROUP_N", 2)
+    pred = _preds([0, 0, 0, 0, 1, 1], [0.6, 0.7, 0.2, 0.1, 0.9, 0.8])
+    meta = pd.DataFrame({config.ID_COL: pred[config.ID_COL], "race": ["A"] * 6})
+    t = equalizing_threshold(pred, meta, "race", "A", target_fpr=0.0)
+    assert t > 0.7                                      # must clear both negatives at 0.6 and 0.7
+    assert disparity_rates(pred, meta, "race", t).iloc[0]["fpr"] == 0

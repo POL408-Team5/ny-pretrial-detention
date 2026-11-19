@@ -393,3 +393,91 @@ def residuals(pred_df, df, by, split="valid", n_boot=None, seed=None) -> pd.Data
         out.insert(0, "feature_set", spec["feature_set"])
         out.insert(0, "model", spec["model"])
     return out
+
+
+# ---------------------------------------------------------------------------
+# C-05: disparity analysis in the Week 8 Class 2 form (confusion matrix per group,
+# four rates, gap and ratio, four-fifths rule, group-specific threshold).
+# Added 2026-11-19 (Yiling) after the instructor asked for an adjustment, not only a report.
+# ---------------------------------------------------------------------------
+
+RATE_COLS = ["flag_rate", "tpr", "fpr", "precision"]
+
+
+def disparity_rates(pred_df, df, group_col, threshold, split="valid",
+                    thresholds_by_group=None) -> pd.DataFrame:
+    """Confusion matrix and the four course rates for each group at a fixed threshold.
+
+    flag_rate = (TP + FP) / n, tpr = TP / (TP + FN), fpr = FP / (FP + TN),
+    precision = TP / (TP + FP). `thresholds_by_group` overrides the threshold for named
+    groups (used for the after-the-model adjustment). Groups with n < MIN_GROUP_N are
+    dropped; a rate is blank when its denominator is below MIN_GROUP_N. Errors are
+    relative to the historical decision label.
+    """
+    data = _attach(pred_df, df, group_col, split)
+    over = thresholds_by_group or {}
+    rows = []
+    for group, g in data.groupby(group_col, sort=True):
+        y, p = g["y_true"].to_numpy(int), g["y_prob"].to_numpy(float)
+        if len(y) < config.MIN_GROUP_N:
+            continue
+        t = float(over.get(group, threshold))
+        yhat = predict_label(p, t)
+        tp = int(((yhat == 1) & (y == 1)).sum()); fp = int(((yhat == 1) & (y == 0)).sum())
+        fn = int(((yhat == 0) & (y == 1)).sum()); tn = int(((yhat == 0) & (y == 0)).sum())
+        ok = lambda d: d >= config.MIN_GROUP_N
+        rows.append({
+            "group_col": group_col, "group": group, "threshold": t, "n": len(y),
+            "share_pos": float(y.mean()), "TP": tp, "FP": fp, "FN": fn, "TN": tn,
+            "flag_rate": (tp + fp) / len(y),
+            "tpr": tp / (tp + fn) if ok(tp + fn) else np.nan,
+            "fpr": fp / (fp + tn) if ok(fp + tn) else np.nan,
+            "precision": tp / (tp + fp) if ok(tp + fp) else np.nan,
+        })
+    out = pd.DataFrame(rows)
+    if not out.empty:
+        spec = _one_spec(pred_df, split).iloc[0]
+        out.insert(0, "feature_set", spec["feature_set"])
+        out.insert(0, "model", spec["model"])
+    return out
+
+
+def rate_comparison(table: pd.DataFrame, group_a: str, group_b: str,
+                    four_fifths: float = 0.80) -> pd.DataFrame:
+    """Gap (A − B) and ratio (smaller / larger) for the four rates between two groups.
+
+    The four-fifths rule is applied to flag_rate only, as in class.
+    """
+    t = table.set_index("group")
+    rows = []
+    for rate in RATE_COLS:
+        a, b = float(t.loc[group_a, rate]), float(t.loc[group_b, rate])
+        ratio = min(a, b) / max(a, b) if max(a, b) > 0 else np.nan
+        rows.append({"rate": rate, group_a: a, group_b: b, "gap": a - b, "ratio": ratio,
+                     "four_fifths": (ratio >= four_fifths) if rate == "flag_rate" else np.nan})
+    return pd.DataFrame(rows)
+
+
+def equalizing_threshold(pred_df, df, group_col, group, target_fpr, split="valid",
+                         grid=None) -> float:
+    """Smallest grid threshold at which `group`'s FPR is at or below `target_fpr`.
+
+    After-the-model adjustment (course slide "What Can We Do About a Gap?"). Chosen on the
+    validation year only; the test year reuses the value without searching again.
+    """
+    data = _attach(pred_df, df, group_col, split)
+    g = data.loc[data[group_col].eq(group)]
+    y, p = g["y_true"].to_numpy(int), g["y_prob"].to_numpy(float)
+    neg = y == 0
+    grid = np.round(np.arange(0.05, 0.951, 0.001), 3) if grid is None else np.asarray(grid)
+    for t in grid:
+        if ((p >= t) & neg).sum() / neg.sum() <= target_fpr:
+            return float(t)
+    return float(grid[-1])
+
+
+def missing_by_group(df: pd.DataFrame, flag_col: str, group_col: str) -> pd.DataFrame:
+    """Share of cases with `flag_col` == 1 in each group (course checklist, step 3)."""
+    g = df.assign(_g=df[group_col].astype("string").fillna("Missing")).groupby("_g")
+    out = g[flag_col].agg(n="size", share_missing="mean").reset_index().rename(columns={"_g": group_col})
+    return out.loc[out["n"] >= config.MIN_GROUP_N].reset_index(drop=True)
